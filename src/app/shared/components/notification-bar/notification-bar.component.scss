@@ -1,0 +1,22 @@
+.notification {
+  display: flex;
+}
+
+.notification__text {
+  flex-grow: 1;
+}
+
+.notification__action {
+  margin: -2px -4px -2px 8px;
+}
+
+.notification__action-button {
+  height: 24px;
+  width: 24px;
+  line-height: 1;
+}
+
+.notification__action-icon {
+  font-size: 16px;
+  opacity: .65;
+}

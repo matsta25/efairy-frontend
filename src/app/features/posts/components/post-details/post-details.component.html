@@ -1,0 +1,16 @@
+<div *ngIf="post$ | async as post">
+  <app-page-header>
+    <app-page-header-back [link]="'/posts/list'" ariaLabel="Back to Posts List"></app-page-header-back>
+    <app-page-header-title [addons]="post.date | date">{{post.title}}</app-page-header-title>
+    <button mat-icon-button color="primary" aria-label="Edit Post" [routerLink]="['/','posts', post.id, 'update']" class="ml-auto">
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button mat-icon-button color="warn" aria-label="Delete Post" (click)="delete(post.id)">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </app-page-header>
+
+  <div class="page-content">
+    {{post.body}}
+  </div>
+</div>

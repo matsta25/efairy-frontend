@@ -1,0 +1,33 @@
+.loading-example__wrap {
+  margin-bottom: 16px;
+  line-height: 24px;
+
+  > * {
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+
+.loading-example__icon-wrap {
+  height: 24px;
+  position: relative;
+}
+
+.loading-example__icon-animated {
+  position: absolute;
+  left: 0;
+  top: 0;
+  animation: opacity-animation 1s infinite;
+}
+
+
+@keyframes opacity-animation {
+  0%,
+  100% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}

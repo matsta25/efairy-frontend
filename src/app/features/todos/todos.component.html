@@ -1,0 +1,40 @@
+<div *ngIf="todos$ | async as todos">
+  <app-page-header>
+    <app-page-header-back [link]="'/'" ariaLabel="Back to homepage"></app-page-header-back>
+    <app-page-header-title [addons]="todos.length">To-do list</app-page-header-title>
+    <button mat-icon-button color="primary" aria-label="Reload" class="ml-auto">
+      <mat-icon>refresh</mat-icon>
+    </button>
+  </app-page-header>
+
+  <div class="page-content">
+    <div class="squeeze">
+      <mat-card class="mb-3">
+        <form (ngSubmit)="onSubmit(todoForm)" #todoForm="ngForm" novalidate>
+          <mat-form-field class="w-100">
+            <mat-label>To-do name</mat-label>
+            <input matInput type="text" [(ngModel)]="newTodoName" #todoName="ngModel" name="todoName" required>
+            <mat-error *ngIf="todoName.hasError('required')">
+              Name is required
+            </mat-error>
+          </mat-form-field>
+
+          <div class="text-right">
+            <button mat-button type="reset">Reset</button>
+            <button mat-flat-button color="primary" type="submit" [disabled]="todoForm.invalid">Submit</button>
+          </div>
+        </form>
+      </mat-card>
+
+      <mat-list>
+        <mat-list-item role="listitem" *ngFor="let todo of todos">
+          <mat-checkbox [checked]="todo.done" (change)="onChange(todo, $event.checked)">{{ todo.name }}</mat-checkbox>
+
+          <button mat-icon-button aria-label="Delete to-do item" color="warn" class="ml-auto" (click)="onDelete(todo)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-list-item>
+      </mat-list>
+    </div>
+  </div>
+</div>

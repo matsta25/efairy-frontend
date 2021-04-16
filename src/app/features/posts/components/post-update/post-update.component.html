@@ -1,0 +1,49 @@
+<div *ngIf="post$ | async as post">
+  <app-page-header>
+    <app-page-header-back [link]="'/posts/list'" ariaLabel="Back to Posts List"></app-page-header-back>
+    <app-page-header-title [addons]="post.date | date">{{post.title}}</app-page-header-title>
+    <button mat-icon-button color="warn" aria-label="Delete Post" class="ml-auto" (click)="delete(post.id)">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </app-page-header>
+
+  <div class="page-content">
+    <div class="squeeze">
+      <mat-card>
+        <form [formGroup]="postForm" (submit)="onPostFormSubmit()">
+          <mat-form-field class="w-100">
+            <mat-label>Choose a date</mat-label>
+            <input matInput [formControlName]="'date'" [matDatepicker]="picker">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="postForm.get('date').hasError('required')">
+              Date of Post is required
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="w-100">
+            <mat-label>Post Title</mat-label>
+            <input matInput #title [formControlName]="'title'" maxlength="40">
+            <mat-error *ngIf="postForm.get('title').hasError('required')">
+              Title of Post is required
+            </mat-error>
+            <mat-hint align="end">{{title.value.length}} / 40</mat-hint>
+          </mat-form-field>
+
+          <mat-form-field class="w-100">
+            <mat-label>Body</mat-label>
+            <textarea matInput [formControlName]="'body'" rows="10"></textarea>
+            <mat-error *ngIf="postForm.get('body').hasError('required')">
+              Body of Post is required
+            </mat-error>
+          </mat-form-field>
+
+          <div class="text-right">
+            <button mat-button type="button" [routerLink]="['/','posts']">Cancel</button>
+            <button mat-flat-button color="primary" type="submit">Submit</button>
+          </div>
+        </form>
+      </mat-card>
+    </div>
+  </div>
+</div>

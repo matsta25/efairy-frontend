@@ -1,0 +1,8 @@
+version: '3.6'
+
+services:
+  efairy-frontend:
+    build: .
+    ports:
+      - 80:80
+  # add more services here

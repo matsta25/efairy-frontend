@@ -1,0 +1,25 @@
+// Basic styles
+//
+
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0; // Remove the margin in all browsers.
+  background-color: $body-bg; // As a best practice, apply a default `background-color`.
+}
+
+// Links
+a {
+  color: $link-color;
+  text-decoration: $link-decoration;
+  background-color: transparent; // Remove the gray background on active links in IE 10.
+
+  &:hover {
+    color: $link-hover-color;
+    text-decoration: $link-hover-decoration;
+  }
+}
