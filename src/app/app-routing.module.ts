@@ -12,6 +12,10 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
+    path: 'horoscope',
+    loadChildren: () => import('./features/horoscope/horoscope.module').then(m => m.HoroscopeModule),
+  },
+  {
     path: 'posts',
     loadChildren: () => import('./features/posts/posts.module').then(m => m.PostsModule),
   },
@@ -42,7 +46,7 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes, {
     preloadingStrategy: PreloadAllModules,
-    relativeLinkResolution: 'legacy'
+    relativeLinkResolution: 'legacy',
 })],
   exports: [RouterModule],
 })

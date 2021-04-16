@@ -2,5 +2,6 @@
 
 export const environment = {
   production: true,
-  baseUrl: 'https://my-json-server.typicode.com/matsta25/efairy-frontend'
+// TODO: add docker alias
+  baseUrl: 'http://localhost:8080/api/v1',
 }
