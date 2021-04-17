@@ -5,7 +5,8 @@ import { select, Store } from '@ngrx/store'
 import { Observable } from 'rxjs'
 import { selectDailyHoroscope, selectHoroscopeZodiacSigns } from '../../store/horoscope.selectors'
 import { Horoscope } from '../../models/horoscope.model'
-import { readDailyHoroscope } from '../../store/horoscope.actions'
+import { clearDailyHoroscope, readDailyHoroscope } from '../../store/horoscope.actions'
+import { FormControl, FormGroup, Validators } from '@angular/forms'
 
 @Component({
   selector: 'app-horoscope-daily',
@@ -17,6 +18,10 @@ export class HoroscopeDailyComponent implements OnInit {
   public zodiacSigns$: Observable<ZodiacSign[]>
   public horoscope$: Observable<Horoscope>
 
+  public zodiacSignForm = new FormGroup({
+    zodiacSign: new FormControl('', Validators.required),
+  })
+
   constructor(
     private store: Store<AppState>,
   ) {
@@ -25,8 +30,13 @@ export class HoroscopeDailyComponent implements OnInit {
 
   ngOnInit(): void {
     this.horoscope$ = this.store.pipe(select(selectDailyHoroscope))
-    this.zodiacSigns$.subscribe(value => {
-      this.store.dispatch(readDailyHoroscope({zodiacSign: value[0]}))
-    })
+  }
+
+  public onSubmit(): void {
+    this.store.dispatch(readDailyHoroscope({zodiacSign: this.zodiacSignForm.value.zodiacSign}))
+  }
+
+  public onTryAgain(): void {
+    this.store.dispatch(clearDailyHoroscope())
   }
 }

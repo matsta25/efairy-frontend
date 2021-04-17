@@ -18,6 +18,7 @@ import { MatNativeDateModule, MatRippleModule } from '@angular/material/core'
 import { MatTableModule } from '@angular/material/table'
 import { MatSortModule } from '@angular/material/sort'
 import { MatPaginatorModule } from '@angular/material/paginator'
+import { MatSelectModule } from '@angular/material/select'
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import { MatPaginatorModule } from '@angular/material/paginator'
     MatDialogModule,
     MatNativeDateModule,
     MatRippleModule,
+    MatSelectModule,
   ],
 })
 export class MaterialModule {

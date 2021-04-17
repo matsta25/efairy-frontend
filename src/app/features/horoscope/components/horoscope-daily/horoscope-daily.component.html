@@ -1,5 +1,28 @@
-<pre>{{ horoscope$ | async | json }}</pre>
+<div *ngIf="(horoscope$ | async) === null; then thenBlock else elseBlock"></div>
 
-<hr>
+<ng-template #thenBlock>
 
-<pre>{{ zodiacSigns$ | async | json }}</pre>
+  <h3>Select your zodiac sign:</h3>
+
+  <form [formGroup]="zodiacSignForm" (ngSubmit)="onSubmit()">
+
+    <mat-form-field appearance="fill">
+      <mat-label>Zodiac sign</mat-label>
+      <mat-select formControlName="zodiacSign">
+        <mat-option *ngFor="let zodiacSigns of zodiacSigns$ | async" [value]="zodiacSigns">
+          {{ zodiacSigns.name | titlecase }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <br>
+    <button mat-raised-button color="primary" type="submit" [disabled]="!zodiacSignForm.valid">Get horoscope!</button>
+
+  </form>
+</ng-template>
+
+<ng-template #elseBlock>
+  <pre>{{ horoscope$ | async | json }}</pre>
+
+  <button mat-raised-button color="primary" (click)="onTryAgain()">Try again!</button>
+</ng-template>

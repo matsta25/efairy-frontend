@@ -4,6 +4,7 @@ import { HoroscopeComponent } from './horoscope.component'
 import { HoroscopeDailyComponent } from './components/horoscope-daily/horoscope-daily.component'
 import { HoroscopeRoutingModule } from './horoscope-routing.module'
 import { SharedModule } from '../../shared/shared.module'
+import { ReactiveFormsModule } from '@angular/forms'
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import { SharedModule } from '../../shared/shared.module'
     CommonModule,
     HoroscopeRoutingModule,
     SharedModule,
+    ReactiveFormsModule,
   ],
 })
 export class HoroscopeModule {
