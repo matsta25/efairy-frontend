@@ -1,6 +1,3 @@
-import { NgModule } from '@angular/core'
-import { BrowserModule } from '@angular/platform-browser'
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { AppRoutingModule } from './app-routing.module'
 import { CoreModule } from './core/core.module'
 import { SharedModule } from './shared/shared.module'
@@ -10,6 +7,10 @@ import { HomeComponent } from './core/components/home/home.component'
 import { HeaderComponent } from './core/components/header/header.component'
 import { FooterComponent } from './core/components/footer/footer.component'
 import { NotificationPageComponent } from './core/components/notification-page/notification-page.component'
+import { AuthModule } from './core/auth/auth.module'
+import { NgModule } from '@angular/core'
+import { BrowserModule } from '@angular/platform-browser'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { NotificationPageComponent } from './core/components/notification-page/n
     // core & shared
     CoreModule,
     SharedModule,
+    AuthModule,
 
     // app routing
     AppRoutingModule,

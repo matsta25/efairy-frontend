@@ -11,3 +11,7 @@ TODO:
  - [ ] add security to nginx 
  - [ ] pwa
  - [ ] ...
+
+
+
+//converter https://generujemy.pl/en/converter_url

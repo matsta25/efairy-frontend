@@ -1,6 +1,6 @@
 {
-  "/api": {
-    "target": "http://localhost:3000",
+  "/auth/realms/efairy-realm/protocol/openid-connect/token": {
+    "target": "http://localhost:8082",
     "secure": false
   }
 }
