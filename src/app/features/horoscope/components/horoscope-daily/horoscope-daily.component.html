@@ -2,21 +2,21 @@
 
 <ng-template #thenBlock>
 
-  <h3>Select your zodiac sign:</h3>
+  <h3>Wybierz swoj znak zodiaku:</h3>
 
   <form [formGroup]="zodiacSignForm" (ngSubmit)="onSubmit()">
 
     <mat-form-field appearance="fill">
-      <mat-label>Zodiac sign</mat-label>
+      <mat-label>Znak zodiaku</mat-label>
       <mat-select formControlName="zodiacSign">
-        <mat-option *ngFor="let zodiacSigns of zodiacSigns$ | async" [value]="zodiacSigns">
+        <mat-option *ngFor="let zodiacSigns of zodiacSignsSorted" [value]="zodiacSigns">
           {{ zodiacSigns.name | titlecase }}
         </mat-option>
       </mat-select>
     </mat-form-field>
 
     <br>
-    <button mat-raised-button color="primary" type="submit" [disabled]="!zodiacSignForm.valid">Get horoscope!</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="!zodiacSignForm.valid">Pokaż horoscope!</button>
 
   </form>
 </ng-template>
@@ -24,5 +24,5 @@
 <ng-template #elseBlock>
   <pre>{{ horoscope$ | async | json }}</pre>
 
-  <button mat-raised-button color="primary" (click)="onTryAgain()">Try again!</button>
+  <button mat-raised-button color="primary" (click)="onTryAgain()">Sprawdź ponownie!</button>
 </ng-template>

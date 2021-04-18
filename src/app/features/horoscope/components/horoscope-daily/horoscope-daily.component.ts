@@ -16,6 +16,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms'
 export class HoroscopeDailyComponent implements OnInit {
 
   public zodiacSigns$: Observable<ZodiacSign[]>
+  public zodiacSignsSorted: ZodiacSign[] = []
   public horoscope$: Observable<Horoscope>
 
   public zodiacSignForm = new FormGroup({
@@ -30,13 +31,22 @@ export class HoroscopeDailyComponent implements OnInit {
 
   ngOnInit(): void {
     this.horoscope$ = this.store.pipe(select(selectDailyHoroscope))
+    this.zodiacSigns$.subscribe(zodiacSigns => {
+      if (zodiacSigns.length > 0) {
+        this.zodiacSignsSorted = [...zodiacSigns].sort(this.compareFn())
+      }
+    })
   }
-
   public onSubmit(): void {
     this.store.dispatch(readDailyHoroscope({zodiacSign: this.zodiacSignForm.value.zodiacSign}))
   }
 
   public onTryAgain(): void {
     this.store.dispatch(clearDailyHoroscope())
+    this.zodiacSignForm.reset()
+  }
+
+  private compareFn() {
+    return (a, b) => a.name !== b.name ? a.name < b.name ? -1 : 1 : 0
   }
 }
