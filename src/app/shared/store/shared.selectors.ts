@@ -13,3 +13,8 @@ export const selectLoading = createSelector(
   selectSharedState,
   (state: SharedState) => state.loading,
 )
+
+export const selectIsDarkMode = createSelector(
+  selectSharedState,
+  (state: SharedState) => state.isDarkMode,
+)

@@ -39,11 +39,15 @@ $display2-line-height: 48px;
 // hue. Available color palettes: https://material.io/design/color/
 @import "~@angular/material/theming";
 
+// light theme colors
 $app-primary: mat-palette($mat-blue);
 $app-accent: mat-palette($mat-pink, A200, A100, A400);
-
-// The warn palette is optional (defaults to red).
 $app-warn: mat-palette($mat-red);
+
+// dark theme colors
+$app-primary-dark: mat-palette($mat-orange, 300);
+$app-accent-dark: mat-palette($mat-yellow, 300);
+$app-warn-dark: mat-palette($mat-red);
 
 $color-primary: map-get($app-primary, 500);
 $color-success: map-get(mat-palette($mat-green), 500);

@@ -1,6 +1,6 @@
 <app-progress></app-progress>
 
-<mat-sidenav-container class="app-wrapper">
+<mat-sidenav-container class="app-wrapper mat-app-background" [ngClass]="{'dark-theme-mode': (isDarkTheme$ | async)}">
   <mat-sidenav mode="side" #sidenav class="app-sidebar">
     <aside>
       <nav>

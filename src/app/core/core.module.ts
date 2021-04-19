@@ -14,6 +14,7 @@ import { httpInterceptorProviders } from './interceptors'
 import { ProgressComponent } from './components/progress/progress.component'
 import { NgProgressModule } from 'ngx-progressbar'
 import { NgProgressHttpModule } from 'ngx-progressbar/http'
+import { metaReducers } from '../shared/store'
 
 
 @NgModule({
@@ -25,7 +26,7 @@ import { NgProgressHttpModule } from 'ngx-progressbar/http'
     HttpClientModule,
 
     //  ngrx
-    StoreModule.forRoot(appReducers),
+    StoreModule.forRoot(appReducers, {metaReducers}),
     EffectsModule.forRoot(appEffects),
     StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
 

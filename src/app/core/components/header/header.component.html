@@ -3,14 +3,16 @@
     <mat-icon>menu</mat-icon>
   </button>
 
-  <img src="assets/logo-white.svg" class="app-toolbar__logo" alt=""> Efairy
+<!--  TODO: add pointer below-->
+  <div [routerLink]="['/']"><img src="assets/logo-white.svg" class="app-toolbar__logo" alt="">Efairy</div>
 
   <div class="app-toolbar__right">
-    <span>
-      <button mat-icon-button aria-label="Login" (click)="onLogin()">
-        <mat-icon>login</mat-icon>
-      </button>
-    </span>
+    <button mat-icon-button aria-label="Change theme" (click)="onChangeTheme()">
+      <mat-icon>{{ (isDarkMode$ | async) === true ? 'brightness_5' : 'brightness_2' }}</mat-icon>
+    </button>
+    <button mat-icon-button aria-label="Login/Logout" (click)="onLoginLogout()">
+      <mat-icon>{{ (isAuthenticated$ | async) === true ? 'logout' : 'login' }}</mat-icon>
+    </button>
 
 <!--    <button mat-icon-button aria-label="Logout">-->
 <!--      <mat-icon>logout</mat-icon>-->

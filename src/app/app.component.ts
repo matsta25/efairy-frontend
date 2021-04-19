@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core'
 import { NavigationEnd, Router } from '@angular/router'
 import { filter } from 'rxjs/operators'
-import { Store } from '@ngrx/store'
+import { select, Store } from '@ngrx/store'
 import { SharedState } from './shared/store/shared.state'
 import { checkIsOnline } from './shared/store/shared.actions'
 import { RouterHistoryService } from './shared/services/router-history.service'
+import { Observable } from 'rxjs'
+import { selectIsDarkMode } from './shared/store/shared.selectors'
 
 
 @Component({
@@ -14,8 +16,11 @@ import { RouterHistoryService } from './shared/services/router-history.service'
 })
 export class AppComponent implements OnInit {
 
+  public isDarkTheme$: Observable<boolean>
+
   constructor(private store: Store<SharedState>, private router: Router, private routerHistory: RouterHistoryService) {
-    this.store.dispatch(checkIsOnline())
+    store.dispatch(checkIsOnline())
+    this.isDarkTheme$ = store.pipe(select(selectIsDarkMode))
   }
 
   ngOnInit(): void {
