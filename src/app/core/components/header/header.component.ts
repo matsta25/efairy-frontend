@@ -6,7 +6,8 @@ import { AppState } from '../../app-store/app-store.state'
 import { selectIsDarkMode } from '../../../shared/store/shared.selectors'
 import { Observable } from 'rxjs'
 import { isDarkModeOff, isDarkModeOn } from '../../../shared/store/shared.actions'
-import { selectIsAuthenticated } from '../../auth/store/auth.selectors'
+import { selectIsAuthenticated, selectRefreshToken } from '../../auth/store/auth.selectors'
+import { logout } from '../../auth/store/auth.actions'
 
 export const AUTHORIZE_ENDPOINT = '/auth/realms/efairy-realm/protocol/openid-connect/auth'
 
@@ -20,12 +21,14 @@ export class HeaderComponent {
 
   public isDarkMode$: Observable<boolean>
   public isAuthenticated$: Observable<boolean>
+  public refreshToken$: Observable<string>
 
   constructor(
     private store: Store<AppState>,
   ) {
     this.isDarkMode$ = store.pipe(select(selectIsDarkMode))
     this.isAuthenticated$ = store.pipe(select(selectIsAuthenticated))
+    this.refreshToken$ = store.pipe(select(selectRefreshToken))
   }
 
   public onLoginLogout(): void {
@@ -41,7 +44,15 @@ export class HeaderComponent {
   }
 
   private logout(): void {
-    console.log('logout()')
+    let refreshTokenLocal = null
+    this.refreshToken$.subscribe(refreshToken => refreshTokenLocal = refreshToken)
+    this.store.dispatch(logout({
+      logoutRequestModel: {
+        client_id: environment.CLIENT_ID,
+        client_secret: environment.CLIENT_SECRET,
+        refresh_token: refreshTokenLocal,
+      },
+    }))
   }
 
   private login(): void {

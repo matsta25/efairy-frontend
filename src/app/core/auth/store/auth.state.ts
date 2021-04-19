@@ -1,7 +1,9 @@
 export interface AuthState {
-  token: string | null
+  access_token: string | null
+  refresh_token: string | null
 }
 
 export const initialAuthState: AuthState = {
-  token: null,
+  access_token: null,
+  refresh_token: null,
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { AuthenticateRequestModel } from '../model/auth.model'
+import { AuthenticateRequestModel, LogoutRequestModel } from '../model/auth.model'
 import { Observable } from 'rxjs'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 
@@ -10,6 +10,10 @@ export const LOGOUT_ENDPOINT = '/auth/realms/efairy-realm/protocol/openid-connec
   providedIn: 'root',
 })
 export class AuthApiService {
+
+  public options = {
+    headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded'),
+  }
 
   constructor(
     private http: HttpClient,
@@ -23,10 +27,15 @@ export class AuthApiService {
     body.set('client_secret', authenticateRequestModel.client_secret)
     body.set('code', authenticateRequestModel.code)
 
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded'),
-    }
+    return this.http.post(`${AUTHENTICATE_GET_TOKEN_ENDPOINT}`, body.toString(), this.options)
+  }
 
-    return this.http.post(`${AUTHENTICATE_GET_TOKEN_ENDPOINT}`, body.toString(), options)
+  public logout(logoutRequestModel: LogoutRequestModel): Observable<object> {
+    const body = new URLSearchParams()
+    body.set('client_id', logoutRequestModel.client_id)
+    body.set('client_secret', logoutRequestModel.client_secret)
+    body.set('refresh_token', logoutRequestModel.refresh_token)
+
+    return this.http.post(`${LOGOUT_ENDPOINT}`, body.toString(), this.options)
   }
 }

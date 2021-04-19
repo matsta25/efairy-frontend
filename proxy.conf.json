@@ -1,8 +1,10 @@
 {
-  "/auth/realms/efairy-realm/protocol/openid-connect/token": {
-    "target": "http://localhost:8082",
-    "secure": false,
-    "logLevel": "info",
-    "changeOrigin": true
-  }
+  "context": [
+    "/auth/realms/efairy-realm/protocol/openid-connect/token",
+    "/auth/realms/efairy-realm/protocol/openid-connect/logout"
+  ],
+  "target": "http://localhost:8082",
+  "secure": false,
+  "logLevel": "info",
+  "changeOrigin": true
 }
