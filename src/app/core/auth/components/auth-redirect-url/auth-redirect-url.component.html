@@ -6,4 +6,20 @@ refreshToken$: {{ refreshToken$ | async }}
 
 <br><br>
 
+expiresIn$: {{ expiresIn$| async }}
+
+<br><br>
+
 isAuthenticated$: {{ isAuthenticated$ | async }}
+
+<br><br>
+
+expireDateTime$: {{ expireDateTime$ | async | unixToUtc }}
+
+<br><br>
+
+userRoles$: {{ userRoles$ | async }}
+
+<br><br>
+
+<button mat-raised-button color="primary" (click)="onRefreshToken()">Refresh token now!</button>

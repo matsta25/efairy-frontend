@@ -2,11 +2,21 @@ import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { AppState } from '../../../app-store/app-store.state'
 import { select, Store } from '@ngrx/store'
-import { authenticate } from '../../store/auth.actions'
+import { authenticate, refreshToken } from '../../store/auth.actions'
 import { environment } from '../../../../../environments/environment'
 import { selectHoroscopeZodiacSigns } from '../../../../features/horoscope/store/horoscope.selectors'
-import { selectAccessToken, selectIsAuthenticated, selectRefreshToken } from '../../store/auth.selectors'
+import {
+  selectAccessToken,
+  selectExpireDateTime,
+  selectExpiresIn,
+  selectIsAuthenticated,
+  selectRefreshToken, selectUserRoles
+} from '../../store/auth.selectors'
 import { Observable } from 'rxjs'
+
+const GRANT_TYPE_CLIENT_CREDENTIALS = 'client_credentials'
+
+const GRANT_TYPE_REFRESH_TOKEN = 'refresh_token'
 
 @Component({
   selector: 'app-auth-redirect-url',
@@ -17,6 +27,9 @@ export class AuthRedirectUrlComponent implements OnInit {
 
   public accessToken$: Observable<string>
   public refreshToken$: Observable<string>
+  public expiresIn$: Observable<number>
+  public expireDateTime$: Observable<number>
+  public userRoles$: Observable<string[]>
   public isAuthenticated$: Observable<boolean>
 
   constructor(
@@ -25,16 +38,33 @@ export class AuthRedirectUrlComponent implements OnInit {
   ) {
     this.accessToken$ = store.pipe(select(selectAccessToken))
     this.refreshToken$ = store.pipe(select(selectRefreshToken))
+    this.expiresIn$ = store.pipe(select(selectExpiresIn))
+    this.expireDateTime$ = store.pipe(select(selectExpireDateTime))
+    this.userRoles$ = store.pipe(select(selectUserRoles))
     this.isAuthenticated$ = store.pipe(select(selectIsAuthenticated))
   }
 
   ngOnInit(): void {
     this.store.dispatch(authenticate({
       authenticateRequestModel: {
-        grant_type: 'client_credentials',
+        grant_type: GRANT_TYPE_CLIENT_CREDENTIALS,
         client_id: environment.CLIENT_ID,
         client_secret: environment.CLIENT_SECRET,
         code: this.route.snapshot.queryParams.code,
+      },
+    }))
+  }
+
+  public onRefreshToken(): void {
+    let localRefreshToken = null
+    this.refreshToken$.subscribe(refreshTokenValue => localRefreshToken = refreshTokenValue)
+
+    this.store.dispatch(refreshToken({
+      refreshTokenRequestModel: {
+        client_id: environment.CLIENT_ID,
+        grant_type: GRANT_TYPE_REFRESH_TOKEN,
+        client_secret: environment.CLIENT_SECRET,
+        refresh_token: localRefreshToken,
       },
     }))
   }

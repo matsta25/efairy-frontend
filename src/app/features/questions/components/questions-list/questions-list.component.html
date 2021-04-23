@@ -1,0 +1,14 @@
+<div *ngIf="(questions$ | async).length > 0 as questions; else noQuestions">
+  <pre>
+    {{ questions }}
+  </pre>
+</div>
+
+<ng-template #noQuestions>
+  <span>Nie zadałeś jeszcze żadnego pytania.</span>
+  <br><br>
+  <span>Zadaj pytanie aby odpowiedzi na najbardziej nurtujące cie pytania!</span>
+  <br><br>
+  <button mat-raised-button color="primary"  aria-label="Zadaj pytanie" [routerLink]="['/', 'questions', 'create']">Zadaj pytanie</button>
+
+</ng-template>

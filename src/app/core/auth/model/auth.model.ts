@@ -20,3 +20,10 @@ export interface LogoutRequestModel {
   client_secret: string
   refresh_token: string
 }
+
+export interface RefreshTokenRequestModel {
+  client_id: string
+  grant_type: string
+  refresh_token: string
+  client_secret: string
+}

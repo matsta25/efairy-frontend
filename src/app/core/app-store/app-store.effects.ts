@@ -5,12 +5,14 @@ import { UsersEffects } from '../../features/users/store/users.effects'
 import { HoroscopeEffects } from '../../features/horoscope/store/horoscope.effects'
 import { AuthEffects } from '../auth/store/auth.effects'
 import { Type } from '@angular/core'
+import { QuestionsEffects } from '../../features/questions/store/questions.effects'
 
 
 export const appEffects: Type<any>[] = [
   SharedEffects,
   HoroscopeEffects,
   AuthEffects,
+  QuestionsEffects,
   PostsEffects,
   TodosEffects,
   UsersEffects,

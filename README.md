@@ -10,6 +10,8 @@ TODO:
  - [ ] add theme mode switch
  - [ ] add security to nginx 
  - [ ] pwa
+ - [ ] fix logout 
+ - [ ] unsubscribe
  - [ ] ...
 
 

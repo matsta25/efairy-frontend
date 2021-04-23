@@ -1,29 +1,45 @@
-<mat-toolbar class="app-toolbar" color="primary">
-  <button mat-icon-button aria-label="Toggle app menu" class="app-toolbar__btn-menu" (click)="sidenavIconClick.emit()">
-    <mat-icon>menu</mat-icon>
+<mat-toolbar color="primary">
+
+  <button mat-button [routerLink]="['/']">
+    <img src="assets/logo-white.svg" class="app-toolbar__logo" alt="">Efairy
   </button>
 
-<!--  TODO: add pointer below-->
-  <div [routerLink]="['/']"><img src="assets/logo-white.svg" class="app-toolbar__logo" alt="">Efairy</div>
+  <span class="fill-remaining-space"></span>
+  <div fxLayout="row" fxShow="false" fxShow.gt-sm>
 
-  <div class="app-toolbar__right">
-    <button mat-icon-button aria-label="Change theme" (click)="onChangeTheme()">
+    <button mat-button aria-label="Zadaj pytanie" [routerLink]="['/', 'questions']" [routerLinkActive]="['is-active']">
+      <mat-icon>question_answer</mat-icon><span>Pytania</span>
+    </button>
+    <button mat-button aria-label="Horoscopes" [routerLink]="['/', 'horoscope']" [routerLinkActive]="['is-active']">
+      <mat-icon>history_edu</mat-icon><span>Horoskopy</span>
+    </button>
+    <button mat-button aria-label="Change theme" (click)="onChangeTheme()">
       <mat-icon>{{ (isDarkMode$ | async) === true ? 'brightness_5' : 'brightness_2' }}</mat-icon>
     </button>
-    <button mat-icon-button aria-label="Login/Logout" (click)="onLoginLogout()">
-      <mat-icon>{{ (isAuthenticated$ | async) === true ? 'logout' : 'login' }}</mat-icon>
+    <button *ngIf="(isAuthenticated$ | async) === true ? 'logout' : 'login' as text" mat-button aria-label="Login/Logout" (click)="onLoginLogout()">
+      <mat-icon>{{ text }}</mat-icon><span>{{ text === 'login' ? 'Zaloguj się' : 'Wyloguj się' }}</span>
     </button>
 
-<!--    <button mat-icon-button aria-label="Logout">-->
-<!--      <mat-icon>logout</mat-icon>-->
-<!--    </button>-->
-<!--    <button mat-icon-button aria-label="Toggle user menu" [matMenuTriggerFor]="menu">-->
-<!--      <mat-icon>person</mat-icon>-->
-<!--    </button>-->
-<!--    <mat-menu #menu="matMenu">-->
-<!--      <button mat-menu-item>Your profile</button>-->
-<!--      <button mat-menu-item>Settings</button>-->
-<!--      <button mat-menu-item>Sign out</button>-->
-<!--    </mat-menu>-->
   </div>
+  <button mat-button [mat-menu-trigger-for]="menu" fxHide="false" fxHide.gt-sm aria-label="Toggle app menu">
+    <mat-icon>menu</mat-icon>
+  </button>
 </mat-toolbar>
+
+<mat-menu x-position="before" #menu="matMenu">
+  <button mat-menu-item aria-label="Zadaj pytanie" [routerLink]="['/', 'questions']" [routerLinkActive]="['is-active']">
+    <mat-icon>question_answer</mat-icon><span>Pytania</span>
+  </button>
+  <button mat-menu-item aria-label="Horoscopes" [routerLink]="['/', 'horoscope']" [routerLinkActive]="['is-active']">
+    <mat-icon>history_edu</mat-icon>
+    <span>Horoskopy</span>
+  </button>
+  <button mat-menu-item aria-label="Change theme" (click)="onChangeTheme()">
+    <mat-icon>{{ (isDarkMode$ | async) === true ? 'brightness_5' : 'brightness_2' }}</mat-icon>
+    <span>Zmień kolorystykę</span>
+  </button>
+  <button mat-menu-item *ngIf="(isAuthenticated$ | async) === true ? 'logout' : 'login' as text" aria-label="Login/Logout" (click)="onLoginLogout()">
+    <mat-icon>{{ text }}</mat-icon>
+    <span>{{ text === 'login' ? 'Zaloguj się' : 'Wyloguj się' }}</span>
+  </button>
+</mat-menu>

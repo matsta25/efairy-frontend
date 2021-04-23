@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { AuthenticateRequestModel, LogoutRequestModel } from '../model/auth.model'
+import { AuthenticateRequestModel, LogoutRequestModel, RefreshTokenRequestModel } from '../model/auth.model'
 import { Observable } from 'rxjs'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 
@@ -26,6 +26,16 @@ export class AuthApiService {
     body.set('client_id', authenticateRequestModel.client_id)
     body.set('client_secret', authenticateRequestModel.client_secret)
     body.set('code', authenticateRequestModel.code)
+
+    return this.http.post(`${AUTHENTICATE_GET_TOKEN_ENDPOINT}`, body.toString(), this.options)
+  }
+
+  public refreshToken(refreshTokenRequestModel: RefreshTokenRequestModel): Observable<object> {
+    const body = new URLSearchParams()
+    body.set('grant_type', refreshTokenRequestModel.grant_type)
+    body.set('client_id', refreshTokenRequestModel.client_id)
+    body.set('refresh_token', refreshTokenRequestModel.refresh_token)
+    body.set('client_secret', refreshTokenRequestModel.client_secret)
 
     return this.http.post(`${AUTHENTICATE_GET_TOKEN_ENDPOINT}`, body.toString(), this.options)
   }

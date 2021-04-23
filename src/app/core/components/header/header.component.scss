@@ -1,16 +1,9 @@
-.app-toolbar {
-  font-weight: normal;
+.fill-remaining-space {
+  /*This fills the remaining space, by using flexbox.
+ Every toolbar row uses a flexbox row layout. */
+  flex: 1 1 auto;
 }
 
-.app-toolbar__btn-menu {
-  margin-right: 12px;
-}
-
-.app-toolbar__logo {
-  width: 28px;
-  height: 28px;
-}
-
-.app-toolbar__right {
-  margin-left: auto;
+.is-active {
+  color: #6610f2;
 }

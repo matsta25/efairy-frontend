@@ -14,7 +14,22 @@ export const selectRefreshToken = createSelector(
   (state: AuthState) => state.refresh_token,
 )
 
+export const selectExpiresIn = createSelector(
+  selectAuthState,
+  (state: AuthState) => state.expires_in,
+)
+
+export const selectExpireDateTime = createSelector(
+  selectAuthState,
+  (state: AuthState) => state.expireDateTime,
+)
+
+export const selectUserRoles = createSelector(
+  selectAuthState,
+  (state: AuthState) => state.userRoles,
+)
+
 export const selectIsAuthenticated = createSelector(
-  selectRefreshToken,
-  (token: string) => !!token,
+  selectAuthState,
+  (state: AuthState) => !!state.access_token,
 )

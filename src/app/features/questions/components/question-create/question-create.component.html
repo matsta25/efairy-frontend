@@ -1,0 +1,29 @@
+
+<button mat-raised-button aria-label="Zadaj pytanie" color="accent" [routerLink]="['/', 'questions']" [routerLinkActive]="['is-active']">
+  <mat-icon>question_answer</mat-icon><span>Wróć do pytań</span>
+</button>
+
+<br><br>
+Zadaj pytanie
+
+<form [formGroup]="questionForm" (ngSubmit)="onSubmit()">
+
+  <mat-form-field class="w-100" appearance="fill">
+    <mat-label>Pytanie</mat-label>
+    <textarea matInput #contentLocal formControlName="content" placeholder="Tutaj wpisz swoje pytanie..."></textarea>
+
+    <span *ngIf="content.invalid && (content.dirty || content.touched)">
+      <mat-error *ngIf="content.errors.maxlength">
+        Pytanie jest za długie!
+      </mat-error>
+    </span>
+
+    <mat-hint align="start"><strong>Nie zapomnij podać swojej daty urodzenia!</strong></mat-hint>
+    <mat-hint align="end">{{contentLocal.value.length}} / 56</mat-hint>
+
+  </mat-form-field>
+
+  <br>
+  <button mat-raised-button color="primary" type="submit" [disabled]="!questionForm.valid">Wyślij</button>
+
+</form>

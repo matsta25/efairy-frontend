@@ -16,6 +16,10 @@ const routes: Routes = [
     loadChildren: () => import('./features/horoscope/horoscope.module').then(m => m.HoroscopeModule),
   },
   {
+    path: 'questions',
+    loadChildren: () => import('./features/questions/questions.module').then(m => m.QuestionsModule),
+  },
+  {
     path: 'posts',
     loadChildren: () => import('./features/posts/posts.module').then(m => m.PostsModule),
   },

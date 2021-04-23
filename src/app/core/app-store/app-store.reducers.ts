@@ -6,11 +6,13 @@ import { usersReducer } from '../../features/users/store/users.reducer'
 import { horoscopeReducer } from '../../features/horoscope/store/horoscope.reducer'
 import { authReducer } from '../auth/store/auth.reducer'
 import { ActionReducerMap } from '@ngrx/store'
+import { questionsReducer } from '../../features/questions/store/questions.reducer'
 
 
 export const appReducers: ActionReducerMap<AppState> = {
   shared: sharedReducer,
   horoscope: horoscopeReducer,
+  questions: questionsReducer,
   auth: authReducer,
   posts: postsReducer,
   todos: todosReducer,

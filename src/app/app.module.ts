@@ -11,6 +11,7 @@ import { AuthModule } from './core/auth/auth.module'
 import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { FlexLayoutModule } from '@angular/flex-layout'
 
 
 @NgModule({
@@ -21,21 +22,22 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
     FooterComponent,
     NotificationPageComponent, // TODO: After creating PageHeaderComponent move it to declarations of CoreModule
   ],
-  imports: [
-    // angular
-    BrowserModule,
+    imports: [
+        // angular
+        BrowserModule,
 
-    // material design
-    BrowserAnimationsModule,
+        // material design
+        BrowserAnimationsModule,
 
-    // core & shared
-    CoreModule,
-    SharedModule,
-    AuthModule,
+        // core & shared
+        CoreModule,
+        SharedModule,
+        AuthModule,
 
-    // app routing
-    AppRoutingModule,
-  ],
+        // app routing
+        AppRoutingModule,
+        FlexLayoutModule,
+    ],
   providers: [],
   bootstrap: [AppComponent],
 })

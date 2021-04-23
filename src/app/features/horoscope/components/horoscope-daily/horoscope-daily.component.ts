@@ -30,6 +30,7 @@ export class HoroscopeDailyComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.store.dispatch(clearDailyHoroscope())
     this.horoscope$ = this.store.pipe(select(selectDailyHoroscope))
     this.zodiacSigns$.subscribe(zodiacSigns => {
       if (zodiacSigns.length > 0) {
@@ -37,6 +38,7 @@ export class HoroscopeDailyComponent implements OnInit {
       }
     })
   }
+
   public onSubmit(): void {
     this.store.dispatch(readDailyHoroscope({zodiacSign: this.zodiacSignForm.value.zodiacSign}))
   }
