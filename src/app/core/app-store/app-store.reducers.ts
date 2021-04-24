@@ -7,6 +7,7 @@ import { horoscopeReducer } from '../../features/horoscope/store/horoscope.reduc
 import { authReducer } from '../auth/store/auth.reducer'
 import { ActionReducerMap } from '@ngrx/store'
 import { questionsReducer } from '../../features/questions/store/questions.reducer'
+import { moderatorReducer } from '../../features/moderator/store/moderator.reducer'
 
 
 export const appReducers: ActionReducerMap<AppState> = {
@@ -14,6 +15,7 @@ export const appReducers: ActionReducerMap<AppState> = {
   horoscope: horoscopeReducer,
   questions: questionsReducer,
   auth: authReducer,
+  moderator: moderatorReducer,
   posts: postsReducer,
   todos: todosReducer,
   users: usersReducer,

@@ -5,7 +5,8 @@ import { QuestionsRoutingModule } from './questions-routing.module'
 import { QuestionsComponent } from './questions.component'
 import { QuestionsListComponent } from './components/questions-list/questions-list.component'
 import { SharedModule } from '../../shared/shared.module'
-import { QuestionCreateComponent } from './components/question-create/question-create.component'
+import { QuestionCreateComponent } from './components/question-create/question-create.component';
+import { QuestionShowAnswerComponent } from './components/question-show-answer/question-show-answer.component'
 
 
 @NgModule({
@@ -13,6 +14,7 @@ import { QuestionCreateComponent } from './components/question-create/question-c
     QuestionsComponent,
     QuestionsListComponent,
     QuestionCreateComponent,
+    QuestionShowAnswerComponent,
   ],
   imports: [
     CommonModule,

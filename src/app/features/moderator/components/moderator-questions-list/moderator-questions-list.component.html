@@ -1,0 +1,28 @@
+<div *ngIf="(moderatorQuestions$ | async).length > 0; else noQuestions">
+  <div *ngIf="moderatorQuestions$ | async as moderatorQuestions">
+
+    <h3>Pytania:</h3>
+
+    <mat-card *ngFor="let moderatorQuestion of moderatorQuestions" class="m-3">
+      <mat-card-subtitle>Pytanie z {{ moderatorQuestion.createdDate | date:'medium' }}, id: {{ moderatorQuestion.id }}, userId: {{ moderatorQuestion.userId }}</mat-card-subtitle>
+      <mat-card-content>
+        {{ moderatorQuestion.content }}
+      </mat-card-content>
+      <mat-card *ngIf="moderatorQuestion.answer !== null">
+        <mat-card-subtitle>Odpowiedź z {{ moderatorQuestion.answer.createdDate | date:'medium' }}, id: {{ moderatorQuestion.answer.id }}</mat-card-subtitle>
+        <mat-card-content>
+          {{ moderatorQuestion.answer.content }}
+        </mat-card-content>
+      </mat-card>
+      <mat-card-actions *ngIf="moderatorQuestion.answer === null">
+        <button mat-raised-button color="primary" aria-label="Odpowiedz" [routerLink]="['/', 'moderator', moderatorQuestion.id, 'question-create-answer']">
+          Odpowiedz
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
+
+<ng-template #noQuestions>
+  Brak pytań.
+</ng-template>

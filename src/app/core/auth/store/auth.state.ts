@@ -4,6 +4,7 @@ export interface AuthState {
   expires_in: number | null
   expireDateTime: number | null
   userRoles: string[] | null
+  refreshTokenInProgress: boolean
 }
 
 export const initialAuthState: AuthState = {
@@ -12,4 +13,5 @@ export const initialAuthState: AuthState = {
   expires_in: null,
   expireDateTime: null,
   userRoles: [],
+  refreshTokenInProgress: false,
 }

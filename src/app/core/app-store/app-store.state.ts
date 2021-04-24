@@ -5,6 +5,7 @@ import { UsersState } from '../../features/users/store/users.state'
 import { HoroscopeState } from '../../features/horoscope/store/horoscope.state'
 import { AuthState } from '../auth/store/auth.state'
 import { QuestionsState } from '../../features/questions/store/questions.state'
+import { ModeratorState } from '../../features/moderator/store/moderator.state'
 
 
 export interface AppState {
@@ -12,6 +13,7 @@ export interface AppState {
   horoscope: HoroscopeState
   questions: QuestionsState
   auth: AuthState
+  moderator: ModeratorState
   posts: PostsState
   todos: TodosState
   users: UsersState

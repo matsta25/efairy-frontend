@@ -3,12 +3,16 @@ import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest
 import { Router } from '@angular/router'
 import { Observable, throwError } from 'rxjs'
 import { catchError, tap } from 'rxjs/operators'
+import { AuthApiService } from '../auth/services/auth-api.service'
 
 
 @Injectable()
 export class ActionInterceptor implements HttpInterceptor {
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private authApiService: AuthApiService,
+  ) {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -32,7 +36,7 @@ export class ActionInterceptor implements HttpInterceptor {
   private statusCodeHandler(code: number) {
     switch (code) {
       case 401:
-        this.router.navigate(['/login'])
+        this.authApiService.redirectToKeycloak()
         break
     }
   }

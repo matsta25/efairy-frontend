@@ -1,0 +1,20 @@
+
+<button mat-raised-button aria-label="Zadaj pytanie" color="accent" [routerLink]="['/', 'moderator', 'questions-list']" [routerLinkActive]="['is-active']">
+  <mat-icon>question_answer</mat-icon><span>Wróć do pytań</span>
+</button>
+
+<br><br>
+Odpowiedz na pytanie
+
+<form [formGroup]="answerForm" (ngSubmit)="onSubmit()">
+
+  <mat-form-field class="w-100" appearance="fill">
+    <mat-label>Odpowiedz</mat-label>
+    <textarea matInput formControlName="content" placeholder="Tutaj wpisz odpowiedz..."></textarea>
+
+  </mat-form-field>
+
+  <br>
+  <button mat-raised-button color="primary" type="submit" [disabled]="!answerForm.valid">Odpowiedz</button>
+
+</form>

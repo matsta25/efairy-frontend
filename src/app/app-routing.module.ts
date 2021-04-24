@@ -20,6 +20,10 @@ const routes: Routes = [
     loadChildren: () => import('./features/questions/questions.module').then(m => m.QuestionsModule),
   },
   {
+    path: 'moderator',
+    loadChildren: () => import('./features/moderator/moderator.module').then(m => m.ModeratorModule),
+  },
+  {
     path: 'posts',
     loadChildren: () => import('./features/posts/posts.module').then(m => m.PostsModule),
   },

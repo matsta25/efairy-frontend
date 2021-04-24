@@ -6,6 +6,7 @@ import { HoroscopeEffects } from '../../features/horoscope/store/horoscope.effec
 import { AuthEffects } from '../auth/store/auth.effects'
 import { Type } from '@angular/core'
 import { QuestionsEffects } from '../../features/questions/store/questions.effects'
+import { ModeratorEffects } from '../../features/moderator/store/moderator.effects'
 
 
 export const appEffects: Type<any>[] = [
@@ -13,6 +14,7 @@ export const appEffects: Type<any>[] = [
   HoroscopeEffects,
   AuthEffects,
   QuestionsEffects,
+  ModeratorEffects,
   PostsEffects,
   TodosEffects,
   UsersEffects,

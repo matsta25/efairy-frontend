@@ -5,7 +5,7 @@
     "logLevel": "info",
     "changeOrigin": true
   },
-  "/auth/realms/efairy-realm/protocol/openid-connect/login": {
+  "/auth/realms/efairy-realm/protocol/openid-connect/logout": {
     "target": "http://localhost:8082",
     "secure": false,
     "logLevel": "info",

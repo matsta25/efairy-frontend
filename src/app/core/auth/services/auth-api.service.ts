@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core'
 import { AuthenticateRequestModel, LogoutRequestModel, RefreshTokenRequestModel } from '../model/auth.model'
 import { Observable } from 'rxjs'
-import { HttpClient, HttpHeaders } from '@angular/common/http'
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http'
+import { environment } from '../../../../environments/environment'
 
+
+export const AUTHORIZE_ENDPOINT = '/auth/realms/efairy-realm/protocol/openid-connect/auth'
 export const AUTHENTICATE_GET_TOKEN_ENDPOINT = '/auth/realms/efairy-realm/protocol/openid-connect/token'
 export const LOGOUT_ENDPOINT = '/auth/realms/efairy-realm/protocol/openid-connect/logout'
 
@@ -18,6 +21,15 @@ export class AuthApiService {
   constructor(
     private http: HttpClient,
   ) {
+  }
+
+  public redirectToKeycloak(): void {
+    const params = new HttpParams()
+      .set('response_type', 'code')
+      .set('client_id', environment.CLIENT_ID)
+      .set('redirect_uri', environment.REDIRECT_URL)
+
+    window.location.href = environment.KEYCLOAK_AUTH_URL + AUTHORIZE_ENDPOINT + '?' + params.toString()
   }
 
   public authenticate(authenticateRequestModel: AuthenticateRequestModel): Observable<object> {

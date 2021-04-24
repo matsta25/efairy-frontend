@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store'
 import { initialAuthState } from './auth.state'
-import { authenticateSuccess, logoutSuccess } from './auth.actions'
+import { authenticateSuccess, logoutSuccess, refreshToken } from './auth.actions'
 import { decodeToken } from '../services/jwt.functions'
 import { JwtModel } from '../model/jwt.model'
 
@@ -18,6 +18,7 @@ export const authReducer = createReducer(
       expires_in: authenticateResponseModel.expires_in,
       expireDateTime: jwtDecoded.exp,
       userRoles: jwtDecoded.resource_access['efairy-backend']?.roles,
+      refreshTokenInProgress: false,
     }
   }),
   on(logoutSuccess, (state) => {
@@ -27,7 +28,14 @@ export const authReducer = createReducer(
       refresh_token: null,
       expires_in: null,
       expireDateTime: null,
-      userRoles: null,
+      userRoles: [],
+      refreshTokenInProgress: false,
+    }
+  }),
+  on(refreshToken, (state) => {
+    return {
+      ...state,
+      refreshTokenInProgress: true,
     }
   }),
 )

@@ -1,10 +1,21 @@
-<!-- TODO: add lottiefiles here-->
+<div *ngIf="!(userRoles$ | async).includes(userRoles.MODERATOR) && !(userRoles$ | async).includes(userRoles.ADMIN)">
+  <!-- TODO: add lottiefiles here-->
+  <h1>Witaj w Efairy!</h1>
 
-<h1>Witaj w Efairy!</h1>
+  <p>Tutaj możesz sprawdzić horoscope na dziś oraz zadać pytanie wróżce!</p>
 
-<p>Tutaj możesz sprawdzić horoscope na dziś oraz zadać pytanie wróżce!</p>
+  <button class="mr-3" mat-raised-button color="accent" [routerLink]="['/', 'horoscope', 'daily']">Sprawdź swój horoskop!</button>
 
-<button class="mr-3" mat-raised-button color="accent" [routerLink]="['/', 'horoscope', 'daily']">Sprawdź swój horoskop!</button>
+  <button mat-raised-button color="primary"  aria-label="Zadaj pytanie" [routerLink]="['/', 'questions', 'create']">Zadaj pytanie wróżce!</button>
+</div>
 
-<button mat-raised-button color="primary"  aria-label="Zadaj pytanie" [routerLink]="['/', 'questions', 'create']">Zadaj pytanie wróżce!</button>
+<br><br>
+
+<button *ngIf="(userRoles$ | async).includes(userRoles.MODERATOR)" mat-raised-button color="primary"  aria-label="Opowiedz na pytania" [routerLink]="['/', 'moderator', 'questions-list']">Opowiedz na pytania</button>
+
+<br><br>
+
+<button *ngIf="(userRoles$ | async).includes(userRoles.ADMIN)" mat-raised-button color="primary"  aria-label="Dodaj horoskopy z pliku csv">Dodaj horoskopy z pliku csv</button>
+
+
 

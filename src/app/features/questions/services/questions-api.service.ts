@@ -18,7 +18,11 @@ export class QuestionsApiService {
     return this.http.get(`${environment.baseUrl}${QUESTIONS_API_ENDPOINT}`)
   }
 
+  public readQuestion(id: number) {
+    return this.http.get(`${environment.baseUrl}${QUESTIONS_API_ENDPOINT}/${id}`)
+  }
+
   public createQuestion(content: string) {
-    return this.http.post(`${environment.baseUrl}${QUESTIONS_API_ENDPOINT}`, { questionContent: content })
+    return this.http.post(`${environment.baseUrl}${QUESTIONS_API_ENDPOINT}`, content)
   }
 }

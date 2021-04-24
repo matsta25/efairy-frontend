@@ -5,6 +5,7 @@ import { Observable } from 'rxjs'
 import { Question } from '../../model/questions.model'
 import { selectQuestions } from '../../store/questions.selectors'
 import { readQuestions } from '../../store/questions.actions'
+import { map } from 'rxjs/operators'
 
 @Component({
   selector: 'app-questions-list',
@@ -18,7 +19,11 @@ export class QuestionsListComponent implements OnInit {
   constructor(
     private store: Store<AppState>,
   ) {
-    this.questions$ = store.pipe(select(selectQuestions))
+    this.questions$ = store.pipe(
+      select(selectQuestions),
+      map(questions => [...questions]
+        .sort((a, b) => new Date(b.createdDate).getTime() - new Date(a.createdDate).getTime())),
+    )
   }
 
   ngOnInit(): void {

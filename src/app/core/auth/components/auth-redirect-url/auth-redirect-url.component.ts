@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnDestroy, OnInit } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { AppState } from '../../../app-store/app-store.state'
 import { select, Store } from '@ngrx/store'
@@ -12,18 +12,18 @@ import {
   selectIsAuthenticated,
   selectRefreshToken, selectUserRoles
 } from '../../store/auth.selectors'
-import { Observable } from 'rxjs'
+import { Observable, Subscription } from 'rxjs'
 
-const GRANT_TYPE_CLIENT_CREDENTIALS = 'client_credentials'
+export const GRANT_TYPE_CLIENT_CREDENTIALS = 'client_credentials'
 
-const GRANT_TYPE_REFRESH_TOKEN = 'refresh_token'
+export const GRANT_TYPE_REFRESH_TOKEN = 'refresh_token'
 
 @Component({
   selector: 'app-auth-redirect-url',
   templateUrl: './auth-redirect-url.component.html',
   styleUrls: ['./auth-redirect-url.component.scss'],
 })
-export class AuthRedirectUrlComponent implements OnInit {
+export class AuthRedirectUrlComponent implements OnInit, OnDestroy {
 
   public accessToken$: Observable<string>
   public refreshToken$: Observable<string>
@@ -31,6 +31,7 @@ export class AuthRedirectUrlComponent implements OnInit {
   public expireDateTime$: Observable<number>
   public userRoles$: Observable<string[]>
   public isAuthenticated$: Observable<boolean>
+  private subscription: Subscription = new Subscription()
 
   constructor(
     private route: ActivatedRoute,
@@ -57,7 +58,9 @@ export class AuthRedirectUrlComponent implements OnInit {
 
   public onRefreshToken(): void {
     let localRefreshToken = null
-    this.refreshToken$.subscribe(refreshTokenValue => localRefreshToken = refreshTokenValue)
+    this.subscription.add(
+      this.refreshToken$.subscribe(refreshTokenValue => localRefreshToken = refreshTokenValue),
+    )
 
     this.store.dispatch(refreshToken({
       refreshTokenRequestModel: {
@@ -67,5 +70,9 @@ export class AuthRedirectUrlComponent implements OnInit {
         refresh_token: localRefreshToken,
       },
     }))
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe()
   }
 }

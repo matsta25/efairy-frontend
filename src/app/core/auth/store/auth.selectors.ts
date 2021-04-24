@@ -33,3 +33,8 @@ export const selectIsAuthenticated = createSelector(
   selectAuthState,
   (state: AuthState) => !!state.access_token,
 )
+
+export const selectRefreshTokenInProgress = createSelector(
+  selectAuthState,
+  (state: AuthState) => state.refreshTokenInProgress,
+)

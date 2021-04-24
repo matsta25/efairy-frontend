@@ -3,15 +3,16 @@ import { Actions, createEffect, ofType } from '@ngrx/effects'
 import {
   createQuestion,
   createQuestionFail,
-  createQuestionSuccess,
+  createQuestionSuccess, readQuestion, readQuestionFail,
   readQuestions,
   readQuestionsFail,
-  readQuestionsSuccess
+  readQuestionsSuccess, readQuestionSuccess
 } from './questions.actions'
-import { catchError, map, mergeMap } from 'rxjs/operators'
+import { catchError, map, mergeMap, tap } from 'rxjs/operators'
 import { of } from 'rxjs'
 import { QuestionsApiService } from '../services/questions-api.service'
 import { Question } from '../model/questions.model'
+import { Router } from '@angular/router'
 
 @Injectable()
 export class QuestionsEffects {
@@ -19,6 +20,7 @@ export class QuestionsEffects {
   constructor(
     private questionsApiService: QuestionsApiService,
     private actions$: Actions,
+    private router: Router,
   ) {
   }
 
@@ -37,6 +39,21 @@ export class QuestionsEffects {
     ),
   )
 
+  readQuestion$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(readQuestion.type),
+      mergeMap(({id}) => this.questionsApiService.readQuestion(id).pipe(
+        map((question: Question) => ({
+          type: readQuestionSuccess.type,
+          question,
+        })),
+        catchError(() => of({
+          type: readQuestionFail.type,
+        })),
+      )),
+    ),
+  )
+
   createQuestion$ = createEffect(() =>
     this.actions$.pipe(
       ofType(createQuestion.type),
@@ -44,6 +61,7 @@ export class QuestionsEffects {
         map(() => ({
           type: createQuestionSuccess.type,
         })),
+        tap(() => this.router.navigate(['/', 'questions', 'list'])),
         catchError(() => of({
           type: createQuestionFail.type,
         })),

@@ -7,10 +7,16 @@
   <span class="fill-remaining-space"></span>
   <div fxLayout="row" fxShow="false" fxShow.gt-sm>
 
-    <button mat-button aria-label="Zadaj pytanie" [routerLink]="['/', 'questions']" [routerLinkActive]="['is-active']">
+    <button *ngIf="(userRoles$ | async).includes(userRoles.ADMIN)" mat-button aria-label="Moderator" [routerLink]="['/', 'admin']" [routerLinkActive]="['is-active']">
+      <mat-icon>build</mat-icon><span>Admin</span>
+    </button>
+    <button *ngIf="(userRoles$ | async).includes(userRoles.MODERATOR)" mat-button aria-label="Moderator" [routerLink]="['/', 'moderator']" [routerLinkActive]="['is-active']">
+      <mat-icon>pending_actions</mat-icon><span>Moderator</span>
+    </button>
+    <button *ngIf="!(userRoles$ | async).includes(userRoles.MODERATOR) && !(userRoles$ | async).includes(userRoles.ADMIN)" mat-button aria-label="Zadaj pytanie" [routerLink]="['/', 'questions']" [routerLinkActive]="['is-active']">
       <mat-icon>question_answer</mat-icon><span>Pytania</span>
     </button>
-    <button mat-button aria-label="Horoscopes" [routerLink]="['/', 'horoscope']" [routerLinkActive]="['is-active']">
+    <button *ngIf="!(userRoles$ | async).includes(userRoles.MODERATOR) && !(userRoles$ | async).includes(userRoles.ADMIN)" mat-button aria-label="Horoscopes" [routerLink]="['/', 'horoscope']" [routerLinkActive]="['is-active']">
       <mat-icon>history_edu</mat-icon><span>Horoskopy</span>
     </button>
     <button mat-button aria-label="Change theme" (click)="onChangeTheme()">
@@ -27,10 +33,17 @@
 </mat-toolbar>
 
 <mat-menu x-position="before" #menu="matMenu">
-  <button mat-menu-item aria-label="Zadaj pytanie" [routerLink]="['/', 'questions']" [routerLinkActive]="['is-active']">
+
+  <button *ngIf="(userRoles$ | async).includes(userRoles.ADMIN)" mat-menu-item aria-label="Moderator" [routerLink]="['/', 'admin']" [routerLinkActive]="['is-active']">
+    <mat-icon>build</mat-icon><span>Admin</span>
+  </button>
+  <button *ngIf="(userRoles$ | async).includes(userRoles.MODERATOR) && !(userRoles$ | async).includes(userRoles.ADMIN)" mat-menu-item aria-label="Moderator" [routerLink]="['/', 'moderator']" [routerLinkActive]="['is-active']">
+    <mat-icon>pending_actions</mat-icon><span>Moderator</span>
+  </button>
+  <button *ngIf="!(userRoles$ | async).includes(userRoles.MODERATOR) && !(userRoles$ | async).includes(userRoles.ADMIN)" mat-menu-item aria-label="Zadaj pytanie" [routerLink]="['/', 'questions']" [routerLinkActive]="['is-active']">
     <mat-icon>question_answer</mat-icon><span>Pytania</span>
   </button>
-  <button mat-menu-item aria-label="Horoscopes" [routerLink]="['/', 'horoscope']" [routerLinkActive]="['is-active']">
+  <button *ngIf="!(userRoles$ | async).includes(userRoles.MODERATOR) && !(userRoles$ | async).includes(userRoles.ADMIN)" mat-menu-item aria-label="Horoscopes" [routerLink]="['/', 'horoscope']" [routerLinkActive]="['is-active']">
     <mat-icon>history_edu</mat-icon>
     <span>Horoskopy</span>
   </button>
