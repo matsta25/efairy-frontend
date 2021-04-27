@@ -2,7 +2,7 @@
 
 <ng-template #thenBlock>
 
-  <h3>Wybierz swoj znak zodiaku:</h3>
+  <h3>Wybierz swój znak zodiaku:</h3>
 
   <form [formGroup]="zodiacSignForm" (ngSubmit)="onSubmit()">
 
@@ -22,10 +22,14 @@
 </ng-template>
 
 <ng-template #elseBlock>
-  <mat-card *ngIf="horoscope$ | async as horoscope" class="m-3">
+  <mat-card *ngIf="horoscope$ | async as horoscope" class="my-3 mx-5">
     <mat-card-title>{{ horoscope.zodiacSign | titlecase }} <span class="fw-normal">- horoskop na {{ horoscope.date | date }} </span></mat-card-title>
     <mat-card-content>{{ horoscope.content }}</mat-card-content>
   </mat-card>
   <br>
-  <button mat-raised-button color="primary" (click)="onTryAgain()">Sprawdź ponownie!</button>
+  <button mat-raised-button class="mr-3" color="accent" (click)="onTryAgain()">Sprawdź ponownie!</button>
+
+  <button mat-raised-button color="primary" aria-label="Zadaj pytanie" [routerLink]="['/', 'questions', 'create']">Zadaj
+    pytanie wróżce!
+  </button>
 </ng-template>

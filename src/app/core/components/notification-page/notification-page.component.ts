@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
+import { AnimationOptions } from 'ngx-lottie'
 
 
 @Component({
@@ -11,6 +12,9 @@ export class NotificationPageComponent implements OnInit {
 
   public data: NotificationPageData
   public textCssClass: 'text-success' | 'text-danger' | 'text-primary'
+  public options: AnimationOptions = {
+    path: '/assets/animations/404.json',
+  }
 
   constructor(private activatedRoute: ActivatedRoute) {
   }

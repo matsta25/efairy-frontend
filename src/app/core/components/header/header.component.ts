@@ -17,7 +17,6 @@ import { UserRoles } from '../../auth/model/jwt.model'
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnDestroy {
-  @Output() sidenavIconClick = new EventEmitter()
 
   public isDarkMode$: Observable<boolean>
   public isAuthenticated$: Observable<boolean>
