@@ -1,25 +1,35 @@
 <div *ngIf="(questions$ | async).length > 0; else noQuestions">
   <div *ngIf="questions$ | async as questions">
 
-    <button mat-raised-button color="primary" aria-label="Zadaj pytanie" [routerLink]="['/', 'questions', 'create']">Zadaj
-      nowe pytanie
-    </button>
-
     <h3>Twoje pytania:</h3>
 
-    <mat-card *ngFor="let question of questions" class="m-3">
-      <mat-card-subtitle>Pytanie z {{ question.createdDate | date:'medium' }}</mat-card-subtitle>
-      <mat-card-content>{{ question.content }}</mat-card-content>
-
-      <mat-card *ngIf="question.answer === null">
-        Na razie nie dodano odpowiedzi na to pytanie.
+    <div *ngFor="let question of questions" class="m-5">
+      <mat-card class="m-3">
+        <mat-card-subtitle>Pytanie z {{ question.createdDate | date:'medium' }}</mat-card-subtitle>
+        <mat-card-content>{{ question.content }}</mat-card-content>
       </mat-card>
-      <mat-card-actions *ngIf="question.answer !== null">
+
+      <div *ngIf="question.answer === null">
+        <span class="mr-2">Na razie nie dodano odpowiedzi na to pytanie. Pracujemy nad tym</span>
+        <div class="ticontainer">
+          <div class="tiblock">
+            <div class="tidot"></div>
+            <div class="tidot"></div>
+            <div class="tidot"></div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="question.answer !== null">
         <button mat-raised-button color="primary" aria-label="Odpowiedz" [routerLink]="['/', 'questions', question.id, 'show-answer']">
           Zobacz odpowiedź
         </button>
-      </mat-card-actions>
-    </mat-card>
+      </div>
+    </div>
+
+    <button mat-raised-button color="primary" aria-label="Zadaj pytanie" [routerLink]="['/', 'questions', 'create']">
+      Zadaj nowe pytanie!
+    </button>
   </div>
 </div>
 
@@ -31,5 +41,4 @@
   <button mat-raised-button color="primary" aria-label="Zadaj pytanie" [routerLink]="['/', 'questions', 'create']">Zadaj
     pytanie
   </button>
-
 </ng-template>

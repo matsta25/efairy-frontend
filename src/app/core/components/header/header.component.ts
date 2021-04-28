@@ -10,6 +10,7 @@ import { selectIsAuthenticated, selectRefreshToken, selectUserRoles } from '../.
 import { logout } from '../../auth/store/auth.actions'
 import { AuthApiService } from '../../auth/services/auth-api.service'
 import { UserRoles } from '../../auth/model/jwt.model'
+import { AnimationOptions } from 'ngx-lottie'
 
 @Component({
   selector: 'app-header',
@@ -22,8 +23,12 @@ export class HeaderComponent implements OnDestroy {
   public isAuthenticated$: Observable<boolean>
   public refreshToken$: Observable<string>
   public userRoles$: Observable<string[]>
-  private subscription: Subscription = new Subscription()
   public userRoles = UserRoles
+  public options: AnimationOptions = {
+    path: '/assets/animations/rotating-blob.json',
+  }
+
+  private subscription: Subscription = new Subscription()
 
   constructor(
     private store: Store<AppState>,
