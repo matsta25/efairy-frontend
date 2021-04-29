@@ -2,6 +2,10 @@
 
 <ng-template #thenBlock>
 
+  <div [@flash]="animState | async"
+       (@flash.done)="animDone()">
+    <img [src]="actualImgPath">
+  </div>
   <h3>Wybierz swój znak zodiaku:</h3>
 
   <form [formGroup]="zodiacSignForm" (ngSubmit)="onSubmit()">

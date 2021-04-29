@@ -2,22 +2,28 @@ import { Component, OnDestroy, OnInit } from '@angular/core'
 import { ZODIAC_SIGNS, ZodiacSign } from '../../models/zodiac-sign.model'
 import { AppState } from '../../../../core/app-store/app-store.state'
 import { select, Store } from '@ngrx/store'
-import { Observable, Subscription } from 'rxjs'
+import { Observable, Subscriber, Subscription } from 'rxjs'
 import { selectDailyHoroscope, selectHoroscopeZodiacSigns } from '../../store/horoscope.selectors'
 import { Horoscope } from '../../models/horoscope.model'
 import { clearDailyHoroscope, readDailyHoroscope } from '../../store/horoscope.actions'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
+import { fadeInAnimation, fadeOutAnimation, flashAnimation } from 'angular-animations'
 
 @Component({
   selector: 'app-horoscope-daily',
   templateUrl: './horoscope-daily.component.html',
   styleUrls: ['./horoscope-daily.component.scss'],
+  animations: [
+    flashAnimation({ anchor: 'flash', duration: 3000, delay: 3000 }),
+  ],
 })
 export class HoroscopeDailyComponent implements OnInit, OnDestroy {
 
   public zodiacSigns$: Observable<ZodiacSign[]>
   public zodiacSignsSorted: ZodiacSign[] = []
   public horoscope$: Observable<Horoscope>
+  public animState: Observable<boolean>
+  public actualImgPath = 'assets/zodiacSigns/taurus.png'
   private subscription: Subscription = new Subscription()
 
   public zodiacSignForm = new FormGroup({
@@ -40,6 +46,8 @@ export class HoroscopeDailyComponent implements OnInit, OnDestroy {
         }
       }),
     )
+
+    this.animState = new Observable<boolean>((subscriber: Subscriber<boolean>) => subscriber.next(false))
   }
 
   public onSubmit(): void {
@@ -61,5 +69,19 @@ export class HoroscopeDailyComponent implements OnInit, OnDestroy {
 
   public getZodiacSignValueByName(zodiacSign: string): string {
     return ZODIAC_SIGNS.find(o => o.name === zodiacSign).value
+  }
+
+  public getRandomZodiacSignValue(): string {
+    const rand = Math.floor(Math.random() * Object.keys(ZODIAC_SIGNS).length)
+    return ZODIAC_SIGNS[Object.keys(ZODIAC_SIGNS)[rand]].value
+  }
+
+  animDone() {
+    this.actualImgPath = 'assets/zodiacSigns/' + this.getRandomZodiacSignValue() + '.png'
+    let oldState = null
+    this.animState.subscribe((animState) => oldState = animState )
+    this.animState = new Observable<boolean>((subscriber: Subscriber<boolean>) => {
+      subscriber.next(!oldState)
+    })
   }
 }
