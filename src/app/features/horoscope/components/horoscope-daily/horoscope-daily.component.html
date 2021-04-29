@@ -22,10 +22,15 @@
 </ng-template>
 
 <ng-template #elseBlock>
-  <mat-card *ngIf="horoscope$ | async as horoscope" class="my-3 mx-5">
-    <mat-card-title>{{ horoscope.zodiacSign | titlecase }} <span class="fw-normal">- horoskop na {{ horoscope.date | date }} </span></mat-card-title>
-    <mat-card-content>{{ horoscope.content }}</mat-card-content>
-  </mat-card>
+  <div *ngIf="horoscope$ | async as horoscope">
+    <img [src]="'assets/zodiacSigns/' + getZodiacSignValueByName(horoscope.zodiacSign) + '.png'">
+    <mat-card class="my-3 mx-5">
+      <mat-card-title>{{ horoscope.zodiacSign | titlecase }} <span
+        class="fw-normal">- horoskop na {{ horoscope.date | date:'EEEE, d MMMM, y' | titlecase }} </span>
+      </mat-card-title>
+      <mat-card-content>{{ horoscope.content }}</mat-card-content>
+    </mat-card>
+  </div>
   <br>
   <button mat-raised-button class="mr-3" color="accent" (click)="onTryAgain()">Sprawdź ponownie!</button>
 

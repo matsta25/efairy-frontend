@@ -18,6 +18,10 @@ export class ModeratorApiService {
     return this.http.get(`${environment.baseUrl}${QUESTIONS_API_ENDPOINT}`)
   }
 
+  public readModeratorQuestion(id: number) {
+    return this.http.get(`${environment.baseUrl}${QUESTIONS_API_ENDPOINT}/${id}`)
+  }
+
   public createModeratorAnswer(id: number, content: string) {
     return this.http.post(`${environment.baseUrl}${QUESTIONS_API_ENDPOINT}/${id}/answer`, content)
   }

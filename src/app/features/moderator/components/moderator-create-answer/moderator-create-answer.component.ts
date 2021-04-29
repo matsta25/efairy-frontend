@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { select, Store } from '@ngrx/store'
 import { AppState } from '../../../../core/app-store/app-store.state'
-import { createModeratorAnswer } from '../../store/moderator.actions'
+import { createModeratorAnswer, readModeratorQuestion } from '../../store/moderator.actions'
 import { ActivatedRoute } from '@angular/router'
 import { Observable } from 'rxjs'
-import { Question } from '../../../questions/model/questions.model'
-import { selectQuestion } from '../../../questions/store/questions.selectors'
+import { selectModeratorQuestion } from '../../store/moderator.selectors'
+import { ModeratorQuestion } from '../../model/moderator.model'
 
 @Component({
   selector: 'app-moderator-create-answer',
@@ -17,7 +17,7 @@ export class ModeratorCreateAnswerComponent implements OnInit {
 
   public id: null
 
-  public question$: Observable<Question>
+  public moderatorQuestion$: Observable<ModeratorQuestion>
 
   public answerForm = new FormGroup({
     content: new FormControl('', [Validators.required]),
@@ -27,11 +27,12 @@ export class ModeratorCreateAnswerComponent implements OnInit {
     private store: Store<AppState>,
     private router: ActivatedRoute,
   ) {
-    this.question$ = store.pipe(select(selectQuestion))
+    this.moderatorQuestion$ = store.pipe(select(selectModeratorQuestion))
   }
 
   ngOnInit(): void {
     this.id = this.router.snapshot.params.id
+    this.store.dispatch(readModeratorQuestion({id: this.id}))
   }
 
   public onSubmit(): void {

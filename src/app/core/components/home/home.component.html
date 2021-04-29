@@ -16,8 +16,10 @@
 </div>
 
 <div *ngIf="(userRoles$ | async).includes(userRoles.MODERATOR)"><br><br>
-  <button mat-raised-button color="primary" aria-label="Opowiedz na pytania"
-          [routerLink]="['/', 'moderator', 'questions-list']">Opowiedz na pytania
+  <h3>Witaj, Moderatorze!</h3>
+
+  <button mat-raised-button color="primary" aria-label="Odpowiedz na czekające pytania!"
+          [routerLink]="['/', 'moderator', 'questions-list']">Odpowiedz na czekające pytania!
   </button>
 </div>
 

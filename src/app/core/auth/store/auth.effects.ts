@@ -36,7 +36,7 @@ export class AuthEffects {
           authenticateResponseModel,
         })),
         // TODO: when auth ready then add redirect to / when auth successful
-        // tap(() => this.router.navigate(['/'])),
+        tap(() => this.router.navigate(['/'])),
         catchError(() => of({
           type: authenticateFail.type,
         })),

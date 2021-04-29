@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
-import { ZodiacSign } from '../../models/zodiac-sign.model'
+import { ZODIAC_SIGNS, ZodiacSign } from '../../models/zodiac-sign.model'
 import { AppState } from '../../../../core/app-store/app-store.state'
 import { select, Store } from '@ngrx/store'
 import { Observable, Subscription } from 'rxjs'
@@ -57,5 +57,9 @@ export class HoroscopeDailyComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe()
+  }
+
+  public getZodiacSignValueByName(zodiacSign: string): string {
+    return ZODIAC_SIGNS.find(o => o.name === zodiacSign).value
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core'
 import { Observable } from 'rxjs'
 import { Question } from '../../../questions/model/questions.model'
 import { select, Store } from '@ngrx/store'
@@ -13,7 +13,7 @@ import { readModeratorQuestions } from '../../store/moderator.actions'
 @Component({
   selector: 'app-moderator-questions-list',
   templateUrl: './moderator-questions-list.component.html',
-  styleUrls: ['./moderator-questions-list.component.scss']
+  styleUrls: ['./moderator-questions-list.component.scss'],
 })
 export class ModeratorQuestionsListComponent implements OnInit {
 
@@ -25,7 +25,9 @@ export class ModeratorQuestionsListComponent implements OnInit {
     this.moderatorQuestions$ = store.pipe(
       select(selectModeratorQuestions),
       map(questions => [...questions]
-        .sort((a, b) => new Date(b.createdDate).getTime() - new Date(a.createdDate).getTime())),
+        .sort((a, b) => {
+          return Number(b.answer === null) - Number((a.answer === null))
+        })),
     )
   }
 

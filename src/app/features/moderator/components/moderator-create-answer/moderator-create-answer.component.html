@@ -1,20 +1,28 @@
-
-<button mat-raised-button aria-label="Zadaj pytanie" color="accent" [routerLink]="['/', 'moderator', 'questions-list']" [routerLinkActive]="['is-active']">
-  <mat-icon>question_answer</mat-icon><span>Wróć do pytań</span>
+<button mat-raised-button aria-label="Zadaj pytanie" color="accent" [routerLink]="['/', 'moderator', 'questions-list']"
+        [routerLinkActive]="['is-active']">
+  <mat-icon>question_answer</mat-icon>
+  <span>Przejdź do listy pytań</span>
 </button>
 
 <br><br>
-Odpowiedz na pytanie
+<p>
+  Odpowiedz na pytanie:
+</p>
 
-<form [formGroup]="answerForm" (ngSubmit)="onSubmit()">
+<mat-card *ngIf="moderatorQuestion$ | async as moderatorQuestion" class="m-3">
+  <mat-card-subtitle>Pytanie z {{ moderatorQuestion.createdDate | date:'medium' }}, id: {{ moderatorQuestion.id }}, userId: {{ moderatorQuestion.userId }}</mat-card-subtitle>
+  <mat-card-content>
+    <p>
+      {{ moderatorQuestion.content }}
+    </p>
+    <form [formGroup]="answerForm" (ngSubmit)="onSubmit()">
+      <mat-form-field class="w-100" appearance="fill">
+        <mat-label>Odpowiedz</mat-label>
+        <textarea matInput formControlName="content" placeholder="Tutaj wpisz odpowiedz..."></textarea>
 
-  <mat-form-field class="w-100" appearance="fill">
-    <mat-label>Odpowiedz</mat-label>
-    <textarea matInput formControlName="content" placeholder="Tutaj wpisz odpowiedz..."></textarea>
+      </mat-form-field>
 
-  </mat-form-field>
-
-  <br>
-  <button mat-raised-button color="primary" type="submit" [disabled]="!answerForm.valid">Odpowiedz</button>
-
-</form>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!answerForm.valid">Odpowiedz!</button>
+    </form>
+  </mat-card-content>
+</mat-card>

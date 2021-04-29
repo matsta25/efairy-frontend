@@ -1,4 +1,4 @@
-import { ErrorHandler, NgModule } from '@angular/core'
+import { ErrorHandler, LOCALE_ID, NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { HttpClientModule } from '@angular/common/http'
 import { environment } from '../../environments/environment'

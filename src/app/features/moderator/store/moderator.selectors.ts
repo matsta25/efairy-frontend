@@ -7,3 +7,8 @@ export const selectModeratorQuestions = createSelector(
   selectModeratorState,
   (state: ModeratorState) => state.moderatorQuestions,
 )
+
+export const selectModeratorQuestion = createSelector(
+  selectModeratorState,
+  (state: ModeratorState) => state.moderatorQuestion,
+)
