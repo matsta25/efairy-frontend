@@ -77,11 +77,14 @@ export class HoroscopeDailyComponent implements OnInit, OnDestroy {
   }
 
   animDone() {
-    this.actualImgPath = 'assets/zodiacSigns/' + this.getRandomZodiacSignValue() + '.png'
     let oldState = null
     this.animState.subscribe((animState) => oldState = animState )
     this.animState = new Observable<boolean>((subscriber: Subscriber<boolean>) => {
       subscriber.next(!oldState)
+      console.log('koniec animacji')
+      setTimeout(() => {
+        this.actualImgPath = 'assets/zodiacSigns/' + this.getRandomZodiacSignValue() + '.png'
+      },5000)
     })
   }
 }
