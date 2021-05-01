@@ -39,6 +39,10 @@ const routes: Routes = [
     loadChildren: () => import('./features/moderator/moderator.module').then(m => m.ModeratorModule),
   },
   {
+    path: 'admin',
+    loadChildren: () => import('./features/admin/admin.module').then(m => m.AdminModule),
+  },
+  {
     path: 'posts',
     loadChildren: () => import('./features/posts/posts.module').then(m => m.PostsModule),
   },

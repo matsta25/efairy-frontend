@@ -1,7 +1,8 @@
+<div class="rotating-blob-container">
+  <ng-lottie [options]="options"></ng-lottie>
+</div>
+
 <div *ngIf="!(userRoles$ | async).includes(userRoles.MODERATOR) && !(userRoles$ | async).includes(userRoles.ADMIN)">
-  <div class="rotating-blob-container">
-    <ng-lottie [options]="options"></ng-lottie>
-  </div>
   <h1>Witaj w Efairy!</h1>
 
   <p>Tutaj możesz sprawdzić horoscope na dziś oraz zadać pytanie wróżce!</p>
@@ -15,17 +16,17 @@
   </button>
 </div>
 
-<div *ngIf="(userRoles$ | async).includes(userRoles.MODERATOR)"><br><br>
-  <h3>Witaj, Moderatorze!</h3>
-
+<div *ngIf="(userRoles$ | async).includes(userRoles.MODERATOR)">
+  <h1>Witaj w Efairy, Moderatorze!</h1>
   <button mat-raised-button color="primary" aria-label="Odpowiedz na czekające pytania!"
           [routerLink]="['/', 'moderator', 'questions-list']">Odpowiedz na czekające pytania!
   </button>
 </div>
 
 <div *ngIf="(userRoles$ | async).includes(userRoles.ADMIN)">
-  <br><br>
-  <button mat-raised-button color="primary" aria-label="Dodaj horoskopy z pliku csv">Dodaj horoskopy z pliku csv
+  <h1>Witaj w Efairy, Adminie!</h1>
+  <button mat-raised-button color="primary" aria-label="Dodaj horoskopy z pliku csv" [routerLink]="['/', 'admin', 'horoscope-import']">
+    Dodaj horoskopy z pliku csv
   </button>
 </div>
 

@@ -7,6 +7,7 @@ import { AuthEffects } from '../auth/store/auth.effects'
 import { Type } from '@angular/core'
 import { QuestionsEffects } from '../../features/questions/store/questions.effects'
 import { ModeratorEffects } from '../../features/moderator/store/moderator.effects'
+import { AdminEffects } from '../../features/admin/store/admin.effects'
 
 
 export const appEffects: Type<any>[] = [
@@ -15,6 +16,7 @@ export const appEffects: Type<any>[] = [
   AuthEffects,
   QuestionsEffects,
   ModeratorEffects,
+  AdminEffects,
   PostsEffects,
   TodosEffects,
   UsersEffects,
