@@ -18,11 +18,19 @@
     <form [formGroup]="answerForm" (ngSubmit)="onSubmit()">
       <mat-form-field class="w-100" appearance="fill">
         <mat-label>Odpowiedz</mat-label>
-        <textarea matInput formControlName="content" placeholder="Tutaj wpisz odpowiedz..."></textarea>
+        <textarea matInput #contentLocal formControlName="content" placeholder="Tutaj wpisz odpowiedz..."></textarea>
 
+        <span *ngIf="content.invalid && (content.dirty || content.touched)">
+          <mat-error *ngIf="content.errors.minlength">
+            Odpowiedź jest za krótka! Min 56 znaków.
+          </mat-error>
+        </span>
+
+        <mat-hint align="start"><strong>Postaraj się odpowiedzieć jak najkonkretniej!</strong></mat-hint>
+        <mat-hint align="end">{{contentLocal.value.length}} / minimum 56</mat-hint>
       </mat-form-field>
 
-      <button mat-raised-button color="primary" type="submit" [disabled]="!answerForm.valid">Odpowiedz!</button>
+      <button mat-raised-button color="primary" class="mt-2" type="submit" [disabled]="!answerForm.valid">Odpowiedz!</button>
     </form>
   </mat-card-content>
 </mat-card>

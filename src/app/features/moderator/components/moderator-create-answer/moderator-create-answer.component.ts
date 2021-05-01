@@ -20,7 +20,7 @@ export class ModeratorCreateAnswerComponent implements OnInit {
   public moderatorQuestion$: Observable<ModeratorQuestion>
 
   public answerForm = new FormGroup({
-    content: new FormControl('', [Validators.required]),
+    content: new FormControl('', [Validators.required, Validators.minLength(56)]),
   })
 
   constructor(
@@ -28,6 +28,10 @@ export class ModeratorCreateAnswerComponent implements OnInit {
     private router: ActivatedRoute,
   ) {
     this.moderatorQuestion$ = store.pipe(select(selectModeratorQuestion))
+  }
+
+  get content() {
+    return this.answerForm.get('content')
   }
 
   ngOnInit(): void {

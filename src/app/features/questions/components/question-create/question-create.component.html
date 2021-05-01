@@ -12,10 +12,10 @@
                   placeholder="Tutaj wpisz swoje pytanie..."></textarea>
 
         <span *ngIf="content.invalid && (content.dirty || content.touched)">
-      <mat-error *ngIf="content.errors.maxlength">
-        Pytanie jest za długie!
-      </mat-error>
-    </span>
+          <mat-error *ngIf="content.errors.maxlength">
+            Pytanie jest za długie!
+          </mat-error>
+        </span>
 
         <mat-hint align="start"><strong>Postaraj się zadać jak najkonkretniejsze pytanie!</strong></mat-hint>
         <mat-hint align="end">{{contentLocal.value.length}} / 56</mat-hint>
