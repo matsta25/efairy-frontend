@@ -4,7 +4,7 @@
 
   <div [@flash]="animState | async"
        (@flash.done)="animDone()">
-    <img [src]="actualImgPath">
+    <img class="custom-background-bg mb-3 rounded" [src]="actualImgPath" alt="Horosocpe">
   </div>
   <h3>Wybierz swój znak zodiaku:</h3>
 
@@ -27,7 +27,9 @@
 
 <ng-template #elseBlock>
   <div *ngIf="horoscope$ | async as horoscope">
-    <img [src]="'assets/zodiacSigns/' + getZodiacSignValueByName(horoscope.zodiacSign) + '.png'">
+    <img class="custom-background-bg mb-3 rounded"
+         [src]="'assets/zodiacSigns/' + getZodiacSignValueByName(horoscope.zodiacSign) + '.png'"
+         alt="Horoscope">
     <mat-card class="my-3 mx-5">
       <mat-card-title>{{ horoscope.zodiacSign | titlecase }} <span
         class="fw-normal">- horoskop na {{ horoscope.date | date:'EEEE, d MMMM, y' | titlecase }} </span>
@@ -38,7 +40,7 @@
   <br>
   <button mat-raised-button class="mr-3" color="accent" (click)="onTryAgain()">Sprawdź ponownie!</button>
 
-  <button mat-raised-button color="primary" aria-label="Zadaj pytanie" [routerLink]="['/', 'questions', 'create']">Zadaj
-    pytanie wróżce!
+  <button mat-raised-button color="primary" aria-label="Zadaj pytanie" [routerLink]="['/', 'questions', 'create']">
+    Zadaj pytanie wróżce!
   </button>
 </ng-template>

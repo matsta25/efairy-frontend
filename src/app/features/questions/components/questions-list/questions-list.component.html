@@ -8,18 +8,24 @@
     <h3 class="mb-0">Twoje pytania:</h3>
 
     <div *ngFor="let question of questions" class="m-5">
-      <mat-card class="m-3">
-        <mat-card-subtitle>Pytanie z {{ question.createdDate | date:'medium' }}</mat-card-subtitle>
-        <mat-card-content>{{ question.content }}</mat-card-content>
-      </mat-card>
+<!--      <mat-card class="m-3">-->
+<!--        <mat-card-subtitle>Pytanie z {{ question.createdDate | date:'medium' }}</mat-card-subtitle>-->
+<!--        <mat-card-content>{{ question.content }}</mat-card-content>-->
+<!--      </mat-card>-->
+
+      <div class="speech-bubble custom-background-bg">
+        <p><strong>Pytanie z {{ question.createdDate | date:'medium' }}</strong></p>
+        <p>{{ question.content }}</p>
+      </div>
 
       <div *ngIf="question.answer === null">
-        <span class="mr-2">Wróżymy</span>
-        <div class="ticontainer">
-          <div class="tiblock">
-            <div class="tidot"></div>
-            <div class="tidot"></div>
-            <div class="tidot"></div>
+        <div class="speech-bubble custom-background-bg">
+          <div class="ticontainer">
+            <div class="tiblock">
+              <div class="tidot"></div>
+              <div class="tidot"></div>
+              <div class="tidot"></div>
+            </div>
           </div>
         </div>
       </div>

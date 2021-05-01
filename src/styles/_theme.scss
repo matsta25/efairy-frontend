@@ -21,13 +21,51 @@ $typography-config: mat-typography-config(
 // common styles for Angular Material
 @include mat-core($typography-config);
 
+// mixins
+@import "~@angular/material/theming";
+
+@mixin custom-background-bg-theme($theme) {
+  $primary: map-get($theme, primary);
+  $background: map-get($theme, background);
+  $background-color: mat-color($background, card);
+
+  .custom-background-bg {
+    @include mat-elevation(2);
+    background-color: map-get(mat-palette($primary), 300);
+    color: $background-color;
+  }
+
+  .custom-border {
+    border-color: $background-color;
+  }
+
+  .speech-bubble {
+    @include mat-elevation(2);
+    background: map-get(mat-palette($primary), 300);
+
+    &::after {
+      border-top: 20px solid map-get(mat-palette($primary), 300);
+    }
+  }
+}
+
+@mixin component-themes($theme) {
+  @include custom-background-bg-theme($theme);
+}
+
 // theme objects
 $app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
 $app-theme-dark: mat-dark-theme($app-primary-dark, $app-accent-dark, $app-warn);
 
 .dark-theme-mode {
   @include angular-material-theme($app-theme-dark);
+  @include custom-background-bg-theme($app-theme-dark);
 }
 
 // theme styles for core
 @include angular-material-theme($app-theme);
+@include custom-background-bg-theme($app-theme);
+
+
+
+

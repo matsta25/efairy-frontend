@@ -17,3 +17,4 @@ TODO:
 
 
 //converter https://generujemy.pl/en/converter_url
+//theme https://medium.com/grensesnittet/dynamic-themes-in-angular-material-b6dc0c88dfd7

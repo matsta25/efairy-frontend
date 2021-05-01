@@ -3,6 +3,9 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router'
 
 import { HomeComponent } from './core/components/home/home.component'
 import { NotificationPageComponent, NotificationPageData } from './core/components/notification-page/notification-page.component'
+import { StatusComponent } from './core/components/status/status.component'
+import { TermsComponent } from './core/components/terms/terms.component'
+import { AboutUsComponent } from './core/components/about-us/about-us.component'
 
 
 const routes: Routes = [
@@ -10,6 +13,18 @@ const routes: Routes = [
     path: '',
     component: HomeComponent,
     pathMatch: 'full',
+  },
+  {
+    path: 'status',
+    component: StatusComponent,
+  },
+  {
+    path: 'terms',
+    component: TermsComponent,
+  },
+  {
+    path: 'about-us',
+    component: AboutUsComponent,
   },
   {
     path: 'horoscope',

@@ -14,16 +14,26 @@ import { httpInterceptorProviders } from './interceptors'
 import { ProgressComponent } from './components/progress/progress.component'
 import { NgProgressModule } from 'ngx-progressbar'
 import { NgProgressHttpModule } from 'ngx-progressbar/http'
-import { metaReducers } from '../shared/store'
+import { metaReducers } from '../shared/store';
+import { AboutUsComponent } from './components/about-us/about-us.component';
+import { StatusComponent } from './components/status/status.component';
+import { TermsComponent } from './components/terms/terms.component';
+import { StatusPresentComponent } from './components/status/status-present.component'
+import { SharedModule } from '../shared/shared.module'
 
 
 @NgModule({
   declarations: [
     ProgressComponent,
+    AboutUsComponent,
+    StatusComponent,
+    TermsComponent,
+    StatusPresentComponent,
   ],
   imports: [
     CommonModule,
     HttpClientModule,
+    SharedModule,
 
     //  ngrx
     StoreModule.forRoot(appReducers, {metaReducers}),

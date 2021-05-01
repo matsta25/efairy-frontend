@@ -1,3 +1,21 @@
 <footer class="footer">
-  <small>2021 &copy; Efairy</small>
+  <small>
+    2021 &copy; <a [routerLink]="['/']" class="link-secondary">Efairy</a>
+  </small>
+
+  <small>
+    <a [routerLink]="['/', 'status']" class="link-secondary">Status</a>
+  </small>
+
+  <a [routerLink]="['/']">
+    <img class="footer-icon" src="assets/logo.png" alt="Efiary">
+  </a>
+
+  <small>
+    <a [routerLink]="['/', 'terms']" class="link-secondary">Regulamin</a>
+  </small>
+
+  <small >
+    <a [routerLink]="['/', 'about-us']" class="link-secondary">O nas</a>
+  </small>
 </footer>

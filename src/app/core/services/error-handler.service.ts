@@ -13,6 +13,8 @@ export class ErrorHandlerService extends ErrorHandler {
       this.loggerService.logError(error)
     }
 
-    super.handleError(error)
+    if(error.url !== 'http://localhost:8083/auth/') {
+      super.handleError(error)
+    }
   }
 }

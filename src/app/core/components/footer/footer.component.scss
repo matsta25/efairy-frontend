@@ -1,4 +1,12 @@
 .footer {
   padding: 20px 40px;
   background-color: rgba(0, 0, 0, .05);
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.footer-icon {
+  height: 24px;
+  width: 24px;
+  filter: grayscale(100%);
 }

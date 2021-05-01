@@ -11,6 +11,8 @@ export class ErrorService {
   }
 
   public getServerMessage(error: HttpErrorResponse): string {
-    return (error.error && error.error.message) || error.statusText
+    if(error.url !== 'http://localhost:8083/auth/') {
+      return (error.error && error.error.message) || error.statusText
+    }
   }
 }
