@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { environment } from '../../../../environments/environment'
 
@@ -16,6 +16,10 @@ export class AdminApiService {
   }
 
   public invokeImportHoroscope(file: File) {
-    return this.http.post(`${environment.baseUrl}${BATCH_API_ENDPOINT}${INVOKE_IMPORT_HOROSCOPE_ENDPOINT}`, {file})
+    const formData = new FormData()
+    formData.append('file', file)
+    return this.http.post(`${environment.baseUrl}${BATCH_API_ENDPOINT}${INVOKE_IMPORT_HOROSCOPE_ENDPOINT}`,
+      formData,
+      {responseType: 'text'})
   }
 }

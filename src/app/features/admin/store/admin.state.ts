@@ -1,6 +1,7 @@
-// tslint:disable-next-line:no-empty-interface
 export interface AdminState {
+  result: string
 }
 
 export const initialAdminState: AdminState = {
+  result: null,
 }

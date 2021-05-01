@@ -1,6 +1,30 @@
 <mat-card class="m-3">
   <mat-card-subtitle>Wybierz plik csv z horoskopami</mat-card-subtitle>
   <mat-card-content>
-    TODO
+    <input type="file" class="file-input"
+           (change)="onFileSelected($event)" #fileUpload>
+
+    <div class="file-upload">
+
+      {{fileName || "Nie wybrałeś pliku."}}
+
+      <button mat-mini-fab color="primary" class="upload-btn"
+              (click)="fileUpload.click()">
+        <mat-icon>attach_file</mat-icon>
+      </button>
+    </div>
+
+    <div *ngIf="(result$ | async) as result" class="mt-3">
+      Result: {{ result }}
+
+      <button mat-icon-button aria-label="Refresh" (click)="onRefresh()">
+        <mat-icon>refresh</mat-icon>
+      </button>
+    </div>
+
+    <div class="mt-3">
+      Aby pobrać przykładowy plik kliknij <a class="link-secondary" href="assets/horoscopeBatchInput.csv">TUTAJ</a>.
+    </div>
+
   </mat-card-content>
 </mat-card>
