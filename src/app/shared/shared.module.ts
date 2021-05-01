@@ -13,6 +13,7 @@ import { PageHeaderTitleComponent } from './components/page-header-title/page-he
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component'
 import { UnixToUtcPipe } from './pipes/unix-to-utc.pipe'
 import { ReactiveFormsModule } from '@angular/forms'
+import { TruncatePipe } from './pipes/truncate.pipe'
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { ReactiveFormsModule } from '@angular/forms'
     PageHeaderBackComponent,
     PageHeaderTitleComponent,
     UnixToUtcPipe,
+    TruncatePipe,
   ],
   entryComponents: [
     NotificationBarComponent,
@@ -47,6 +49,7 @@ import { ReactiveFormsModule } from '@angular/forms'
     PageHeaderTitleComponent,
     UnixToUtcPipe,
     ReactiveFormsModule,
+    TruncatePipe,
   ],
 })
 

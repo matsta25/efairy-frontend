@@ -8,9 +8,9 @@
   height: 17px;
 }
 
-.ticontainer .tidot {
-  background-color: #90949c;
-}
+//.ticontainer .tidot {
+//  background-color: #90949c;
+//}
 
 .tidot {
   -webkit-animation: mercuryTypingAnimation 1.5s infinite ease-in-out;
@@ -49,7 +49,7 @@
 
 .speech-bubble {
   border-radius: 4px;
-  margin: 0 auto 40px;
+  margin: 0 0 40px 60px;
   max-width: 400px;
   padding: 15px;
   position: relative;
@@ -70,3 +70,28 @@
     right: 20px;
   }
 }
+
+.speech-bubble-answer {
+  border-radius: 4px;
+  margin: 0 60px 20px 0;
+  max-width: 200px;
+  padding: 15px;
+  position: relative;
+
+  p {
+    margin: 0 0 10px;
+
+    :last-of-type {
+      margin-bottom: 0;
+    }
+  }
+
+  &::after {
+    border-right: 20px solid transparent;
+    bottom: -20px;
+    content: "";
+    position: absolute;
+    left: 20px;
+  }
+}
+

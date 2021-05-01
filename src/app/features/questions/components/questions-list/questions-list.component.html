@@ -1,47 +1,55 @@
 <div *ngIf="(questions$ | async).length > 0; else noQuestions">
   <div *ngIf="questions$ | async as questions">
 
-    <button mat-raised-button color="accent" class="m-2" aria-label="Zadaj pytanie" [routerLink]="['/', 'questions', 'create']">
-      Zadaj nowe pytanie!
-    </button>
+    <div class="d-flex align-items-center justify-content-between mb-2">
+      <h3 class="mb-0">Twoje pytania</h3>
 
-    <h3 class="mb-0">Twoje pytania:</h3>
+      <button mat-raised-button color="accent" class="m-2" aria-label="Zadaj pytanie"
+              [routerLink]="['/', 'questions', 'create']">
+              Zadaj nowe pytanie!
+      </button>
+    </div>
 
-    <div *ngFor="let question of questions" class="m-5">
-<!--      <mat-card class="m-3">-->
-<!--        <mat-card-subtitle>Pytanie z {{ question.createdDate | date:'medium' }}</mat-card-subtitle>-->
-<!--        <mat-card-content>{{ question.content }}</mat-card-content>-->
-<!--      </mat-card>-->
+    <div *ngFor="let question of questions" class="mb-3">
+      <mat-card>
+        <mat-card-content>
 
-      <div class="speech-bubble custom-background-bg">
-        <p><strong>Pytanie z {{ question.createdDate | date:'medium' }}</strong></p>
-        <p>{{ question.content }}</p>
-      </div>
+          <div class="speech-bubble custom-background-bg">
+            <p><strong>Pytanie z {{ question.createdDate | date:'medium' }}</strong></p>
+            <p>{{ question.content }}</p>
+          </div>
 
-      <div *ngIf="question.answer === null">
-        <div class="speech-bubble custom-background-bg">
-          <div class="ticontainer">
-            <div class="tiblock">
-              <div class="tidot"></div>
-              <div class="tidot"></div>
-              <div class="tidot"></div>
+          <div *ngIf="question.answer === null">
+            <div class="speech-bubble-answer custom-background-bg">
+              <div class="ticontainer">
+                <div class="tiblock">
+                  <div class="tidot custom-color"></div>
+                  <div class="tidot custom-color"></div>
+                  <div class="tidot custom-color"></div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
 
-      <div *ngIf="question.answer !== null">
-        <button mat-raised-button color="primary" aria-label="Odpowiedz" [routerLink]="['/', 'questions', question.id, 'show-answer']">
-          Zobacz odpowiedź
-        </button>
-      </div>
+          <div *ngIf="question.answer !== null">
+            <div class="speech-bubble-answer custom-background-bg">
+              {{ question.answer.content | truncate:16:true }}
+              <button mat-icon-button aria-label="Odpowiedz"
+                      [routerLink]="['/', 'questions', question.id, 'show-answer']">
+                <mat-icon>read_more</mat-icon>
+              </button>
+            </div>
+          </div>
+
+        </mat-card-content>
+      </mat-card>
     </div>
   </div>
 </div>
 
 <ng-template #noQuestions>
   <div class="mb-5">
-    <mat-icon class="no-question--icon" color="accent" >contact_support</mat-icon>
+    <mat-icon class="no-question--icon" color="accent">contact_support</mat-icon>
   </div>
 
   <mat-card class="m-3">

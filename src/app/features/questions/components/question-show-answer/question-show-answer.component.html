@@ -1,3 +1,33 @@
-<pre>
-  {{ question$ | async | json }}
-</pre>
+<div class="d-flex align-items-center justify-content-between mb-3">
+  <h3 class="mb-0">Twoje pytanie</h3>
+
+  <button class="mr-3" mat-raised-button aria-label="Zadaj pytanie" color="accent" [routerLink]="['/', 'questions']"
+          [routerLinkActive]="['is-active']">
+    <mat-icon>question_answer</mat-icon>
+    <span>Przejdź listy do pytań</span>
+  </button>
+</div>
+
+<mat-card *ngIf="question$ |async as question" class="p-3 pb-5">
+  <mat-card-content>
+
+    <div class="speech-bubble custom-background-bg">
+      <p><strong>Pytanie z {{ question.createdDate | date:'medium' }}</strong></p>
+      <p>{{ question.content }}</p>
+    </div>
+
+      <div class="speech-bubble-answer custom-background-bg">
+        {{ question.answer.content | truncate:16:true }}
+        <button mat-icon-button aria-label="Odpowiedz"
+                [routerLink]="['/', 'questions', question.id, 'show-answer']">
+          <mat-icon>read_more</mat-icon>
+        </button>
+    </div>
+
+  </mat-card-content>
+</mat-card>
+
+<button mat-raised-button color="primary" class="mt-3" aria-label="Zadaj pytanie"
+        [routerLink]="['/', 'questions', 'create']">
+  Zadaj nowe pytanie!
+</button>

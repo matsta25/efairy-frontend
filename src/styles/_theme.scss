@@ -26,6 +26,7 @@ $typography-config: mat-typography-config(
 
 @mixin custom-background-bg-theme($theme) {
   $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
   $background: map-get($theme, background);
   $background-color: mat-color($background, card);
 
@@ -39,12 +40,25 @@ $typography-config: mat-typography-config(
     border-color: $background-color;
   }
 
+  .custom-color {
+    background-color: $background-color;
+  }
+
   .speech-bubble {
     @include mat-elevation(2);
     background: map-get(mat-palette($primary), 300);
 
     &::after {
       border-top: 20px solid map-get(mat-palette($primary), 300);
+    }
+  }
+
+  .speech-bubble-answer {
+    @include mat-elevation(2);
+    background: map-get(mat-palette($accent), 300);
+
+    &::after {
+      border-top: 20px solid map-get(mat-palette($accent), 300);
     }
   }
 }
