@@ -16,12 +16,8 @@
       <p>{{ question.content }}</p>
     </div>
 
-      <div class="speech-bubble-answer custom-background-bg">
-        {{ question.answer.content | truncate:16:true }}
-        <button mat-icon-button aria-label="Odpowiedz"
-                [routerLink]="['/', 'questions', question.id, 'show-answer']">
-          <mat-icon>read_more</mat-icon>
-        </button>
+    <div class="speech-bubble-answer custom-background-bg">
+      {{ question.answer.content }}
     </div>
 
   </mat-card-content>

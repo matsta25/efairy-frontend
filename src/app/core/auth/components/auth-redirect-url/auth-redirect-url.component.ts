@@ -54,6 +54,35 @@ export class AuthRedirectUrlComponent implements OnInit, OnDestroy {
         code: this.route.snapshot.queryParams.code,
       },
     }))
+
+    function checkTheYear(initYear, targetYear) {
+      switch(targetYear) {
+        case initYear - 30:
+          console.log('I\'m sure in 1985, plutonium is available at every corner drugstore, but in 1955 it\'s a little hard to come by.');
+          return true;
+        case initYear - 100:
+          console.log('A hundred years ago? But that\'s now!');
+          return true;
+        case initYear + 30:
+          console.log('Nobody calls me chicken!')
+          return true;
+        default:
+          console.log('Time traveling is just too dangerous. Better that I devote myself to study the other great mystery of the universe: women!');
+          return false;
+      }
+    }
+
+    function backToTheFuture(targetYear) {
+      var timeMachine = {
+        model: 'DeLorean DMC-12',
+        initYear: '1985'
+      }
+      if(checkTheYear(timeMachine.initYear, targetYear)) {
+        // execute the secret code for time travel to the targetYear
+      }
+    }
+
+
   }
 
   public onRefreshToken(): void {
